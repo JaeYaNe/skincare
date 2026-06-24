@@ -692,6 +692,50 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     });
   });
 });
-</script>
+
+// 올리브영 검색 URL 자동 생성
+(function() {
+  const OY_SEARCH = 'https://www.oliveyoung.co.kr/store/search/getSearchMain.do?query=';
+
+  function buildSearchUrl(brand, name) {
+    // 용량·기획 텍스트 제거
+    const cleanName = name
+      .replace(/\s*\d+\.?\d*\s*(ml|g|매|개)\b.*/gi, '')
+      .replace(/\s*(더블기획|리필기획|기획|듀오|세트|기획상품).*$/g, '')
+      .replace(/\s*\([^)]*\)\s*$/, '')
+      .trim();
+    const query = (brand + ' ' + cleanName).trim();
+    return OY_SEARCH + encodeURIComponent(query) + '&giftYn=N';
+  }
+
+  document.querySelectorAll('.product-card').forEach(card => {
+    // 약국 제품·다이소 제품 제외
+    if (card.dataset.cat === 'rx') return;
+    if (card.querySelector('.tag-nodaiso')) return;
+
+    const brandEl = card.querySelector('.text-gray-400.font-medium');
+    const nameEl  = card.querySelector('.leading-tight');
+    if (!brandEl || !nameEl) return;
+
+    const brand = brandEl.textContent.trim();
+    const name  = nameEl.textContent.trim();
+    const url   = buildSearchUrl(brand, name);
+
+    // 기존 getGoodsDetail 링크를 검색 URL로 교체
+    card.querySelectorAll('a[href*="getGoodsDetail"]').forEach(a => {
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+    });
+
+    // 카드 전체 클릭 (링크 외 영역)
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', e => {
+      if (!e.target.closest('a')) {
+        window.open(url, '_blank', 'noopener');
+      }
+    });
+  });
+})();</script>
 </body>
 </html>
