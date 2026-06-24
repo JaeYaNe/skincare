@@ -534,33 +534,22 @@ tailwind.config = {
 <div class="tab-pane" id="schedule">
   <div class="mb-10 pt-1">
     <h2 class="text-lg font-extrabold text-[#e8507a] border-l-4 border-[#e8507a] pl-3 mb-4">PM 집중 케어 — 격일 교차 스케줄</h2>
-    <div class="overflow-x-auto -mx-4 px-4">
-      <table class="w-full border-collapse bg-white rounded-2xl overflow-hidden shadow-md" style="min-width:520px;">
-        <thead>
-          <tr class="bg-[#fce8e8] text-[#b85c5c]">
-            <th class="px-3 py-2.5 text-left text-xs font-bold whitespace-nowrap">날짜</th>
-            <th class="px-3 py-2.5 text-left text-xs font-bold whitespace-nowrap">추가 제품</th>
-            <th class="px-3 py-2.5 text-left text-xs font-bold whitespace-nowrap">주의사항</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="border-b border-gray-100">
-            <td class="px-3 py-3 text-xs whitespace-nowrap font-bold text-[#e91e63]">A일 (월·수·금)</td>
-            <td class="px-3 py-3 text-xs whitespace-nowrap">더마팩토리 <strong>나이아신아마이드 20%</strong> + 아젤리아 스팟 가능</td>
-            <td class="px-3 py-3 text-xs whitespace-nowrap">나이아신 도포 후 10분 대기. 아젤리아 → 로션 → 파티마겔 순서</td>
-          </tr>
-          <tr class="border-b border-gray-100">
-            <td class="px-3 py-3 text-xs whitespace-nowrap font-bold text-[#2196f3]">B일 (화·목·토)</td>
-            <td class="px-3 py-3 text-xs whitespace-nowrap"><strong>BHA 패드 (셀리맥스)</strong></td>
-            <td class="px-3 py-3 text-xs whitespace-nowrap">T존·나비존 닦아내기. 아젤리아·파티마겔 <span class="text-red-600 font-bold">모두 금지</span></td>
-          </tr>
-          <tr>
-            <td class="px-3 py-3 text-xs whitespace-nowrap font-bold text-[#4caf50]">C일 (일)</td>
-            <td class="px-3 py-3 text-xs whitespace-nowrap">피부 휴식 + 아젤리아 스팟 + 파티마겔 스팟 가능</td>
-            <td class="px-3 py-3 text-xs whitespace-nowrap">팩 or 보습 집중. 아젤리아 → 로션 → 파티마겔 순서 유지</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="space-y-3">
+      <div class="bg-white rounded-2xl shadow-md p-4 border-l-4 border-[#e91e63]">
+        <div class="text-xs font-bold text-[#e91e63] mb-1">A일 (월·수·금)</div>
+        <div class="text-xs font-semibold text-gray-800 mb-1">더마팩토리 <strong>나이아신아마이드 20%</strong> + 아젤리아 스팟 가능</div>
+        <div class="text-xs text-gray-500">나이아신 도포 후 10분 대기. 아젤리아 → 로션 → 파티마겔 순서</div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-md p-4 border-l-4 border-[#2196f3]">
+        <div class="text-xs font-bold text-[#2196f3] mb-1">B일 (화·목·토)</div>
+        <div class="text-xs font-semibold text-gray-800 mb-1"><strong>BHA 패드 (셀리맥스)</strong></div>
+        <div class="text-xs text-gray-500">T존·나비존 닦아내기. 아젤리아·파티마겔 <span class="text-red-600 font-bold">모두 금지</span></div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-md p-4 border-l-4 border-[#4caf50]">
+        <div class="text-xs font-bold text-[#4caf50] mb-1">C일 (일)</div>
+        <div class="text-xs font-semibold text-gray-800 mb-1">피부 휴식 + 아젤리아 스팟 + 파티마겔 스팟 가능</div>
+        <div class="text-xs text-gray-500">팩 or 보습 집중. 아젤리아 → 로션 → 파티마겔 순서 유지</div>
+      </div>
     </div>
   </div>
 </div>
@@ -569,29 +558,62 @@ tailwind.config = {
 <div class="tab-pane" id="ingredients">
   <div class="mb-10 pt-1">
     <h2 class="text-lg font-extrabold text-[#e8507a] border-l-4 border-[#e8507a] pl-3 mb-4">성분 충돌 &amp; 병용 가이드</h2>
-    <div class="overflow-x-auto -mx-4 px-4">
-      <table class="w-full border-collapse bg-white rounded-2xl overflow-hidden shadow-md">
-        <thead>
-          <tr class="bg-[#fce8e8] text-[#b85c5c]">
-            <th class="px-3 py-2.5 text-left text-xs font-bold whitespace-nowrap">조합</th>
-            <th class="px-3 py-2.5 text-left text-xs font-bold whitespace-nowrap">판정</th>
-            <th class="px-3 py-2.5 text-left text-xs font-bold whitespace-nowrap">설명</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="border-b border-gray-100"><td class="px-3 py-2.5 text-xs whitespace-nowrap">나이아신아마이드 20% + BHA</td><td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="inline-block bg-amber-100 text-amber-700 font-bold px-2 py-0.5 rounded-full text-[11px]">⚠ 주의</span></td><td class="px-3 py-2.5 text-xs whitespace-nowrap">초기 4~6주 같은 날 금지. 적응 후 BHA → 나이아신 순서</td></tr>
-          <tr class="border-b border-gray-100"><td class="px-3 py-2.5 text-xs whitespace-nowrap">나이아신아마이드 20% + 비타민C</td><td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="inline-block bg-amber-100 text-amber-700 font-bold px-2 py-0.5 rounded-full text-[11px]">⚠ 주의</span></td><td class="px-3 py-2.5 text-xs whitespace-nowrap">니코틴산 변환 → 홍조 유발 가능. 시간차 두고 사용</td></tr>
-          <tr class="border-b border-gray-100"><td class="px-3 py-2.5 text-xs whitespace-nowrap">BHA + 시카 토너</td><td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="inline-block bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✓ 가능</span></td><td class="px-3 py-2.5 text-xs whitespace-nowrap">BHA 후 시카로 진정 — 좋은 조합</td></tr>
-          <tr class="border-b border-gray-100"><td class="px-3 py-2.5 text-xs whitespace-nowrap">어성초 세럼 + 히알루론산 앰플</td><td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="inline-block bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✓ 가능</span></td><td class="px-3 py-2.5 text-xs whitespace-nowrap">충돌 없음</td></tr>
-          <tr class="border-b border-gray-100"><td class="px-3 py-2.5 text-xs whitespace-nowrap">PDRN 토너 + 모든 성분</td><td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="inline-block bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✓ 가능</span></td><td class="px-3 py-2.5 text-xs whitespace-nowrap">재생 성분, 타 성분과 충돌 없음</td></tr>
-          <tr class="border-b border-gray-100"><td class="px-3 py-2.5 text-xs whitespace-nowrap"><strong>파티마겔 + BHA</strong></td><td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="inline-block bg-red-100 text-red-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✗ 금지</span></td><td class="px-3 py-2.5 text-xs whitespace-nowrap">같은 날 병용 절대 금지 — 자극 과부하, 장벽 손상</td></tr>
-          <tr class="border-b border-gray-100"><td class="px-3 py-2.5 text-xs whitespace-nowrap">파티마겔 + 나이아신아마이드 20%</td><td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="inline-block bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✓ 가능</span></td><td class="px-3 py-2.5 text-xs whitespace-nowrap">크림 후 스팟이므로 직접 접촉 없음</td></tr>
-          <tr class="border-b border-gray-100"><td class="px-3 py-2.5 text-xs whitespace-nowrap"><strong>아젤리아 + BHA</strong></td><td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="inline-block bg-amber-100 text-amber-700 font-bold px-2 py-0.5 rounded-full text-[11px]">⚠ 주의</span></td><td class="px-3 py-2.5 text-xs whitespace-nowrap">초기 4~6주 금지. 적응 후 가능하나 주의</td></tr>
-          <tr class="border-b border-gray-100"><td class="px-3 py-2.5 text-xs whitespace-nowrap">아젤리아 + 나이아신아마이드 20%</td><td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="inline-block bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✓ 가능</span></td><td class="px-3 py-2.5 text-xs whitespace-nowrap">홍조·잡티 시너지. 병용 가능</td></tr>
-          <tr class="border-b border-gray-100"><td class="px-3 py-2.5 text-xs whitespace-nowrap">아젤리아 + 어성초 세럼</td><td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="inline-block bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✓ 가능</span></td><td class="px-3 py-2.5 text-xs whitespace-nowrap">항균 효과 중복 강화</td></tr>
-          <tr><td class="px-3 py-2.5 text-xs whitespace-nowrap">아젤리아 + 파티마겔</td><td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="inline-block bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✓ 가능</span></td><td class="px-3 py-2.5 text-xs whitespace-nowrap">아젤리아(로션 전) → 로션 → 파티마겔(스팟) 순서 유지</td></tr>
-        </tbody>
-      </table>
+    <div class="space-y-2">
+      <div class="bg-white rounded-2xl shadow-sm p-3 flex items-start gap-3">
+        <div class="flex-1 text-xs text-gray-800">나이아신아마이드 20% + BHA</div>
+        <span class="flex-shrink-0 inline-block bg-amber-100 text-amber-700 font-bold px-2 py-0.5 rounded-full text-[11px]">⚠ 주의</span>
+        <div class="flex-1 text-xs text-gray-500">초기 4~6주 같은 날 금지. 적응 후 BHA → 나이아신 순서</div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm p-3 flex items-start gap-3">
+        <div class="flex-1 text-xs text-gray-800">나이아신아마이드 20% + 비타민C</div>
+        <span class="flex-shrink-0 inline-block bg-amber-100 text-amber-700 font-bold px-2 py-0.5 rounded-full text-[11px]">⚠ 주의</span>
+        <div class="flex-1 text-xs text-gray-500">니코틴산 변환 → 홍조 유발 가능. 시간차 두고 사용</div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm p-3 flex items-start gap-3">
+        <div class="flex-1 text-xs text-gray-800">BHA + 시카 토너</div>
+        <span class="flex-shrink-0 inline-block bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✓ 가능</span>
+        <div class="flex-1 text-xs text-gray-500">BHA 후 시카로 진정 — 좋은 조합</div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm p-3 flex items-start gap-3">
+        <div class="flex-1 text-xs text-gray-800">어성초 세럼 + 히알루론산 앰플</div>
+        <span class="flex-shrink-0 inline-block bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✓ 가능</span>
+        <div class="flex-1 text-xs text-gray-500">충돌 없음</div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm p-3 flex items-start gap-3">
+        <div class="flex-1 text-xs text-gray-800">PDRN 토너 + 모든 성분</div>
+        <span class="flex-shrink-0 inline-block bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✓ 가능</span>
+        <div class="flex-1 text-xs text-gray-500">재생 성분, 타 성분과 충돌 없음</div>
+      </div>
+      <div class="bg-red-50 rounded-2xl shadow-sm p-3 flex items-start gap-3 border border-red-200">
+        <div class="flex-1 text-xs font-bold text-gray-800">파티마겔 + BHA</div>
+        <span class="flex-shrink-0 inline-block bg-red-100 text-red-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✗ 금지</span>
+        <div class="flex-1 text-xs text-gray-500">같은 날 병용 절대 금지 — 자극 과부하, 장벽 손상</div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm p-3 flex items-start gap-3">
+        <div class="flex-1 text-xs text-gray-800">파티마겔 + 나이아신아마이드 20%</div>
+        <span class="flex-shrink-0 inline-block bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✓ 가능</span>
+        <div class="flex-1 text-xs text-gray-500">크림 후 스팟이므로 직접 접촉 없음</div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm p-3 flex items-start gap-3">
+        <div class="flex-1 text-xs font-bold text-gray-800">아젤리아 + BHA</div>
+        <span class="flex-shrink-0 inline-block bg-amber-100 text-amber-700 font-bold px-2 py-0.5 rounded-full text-[11px]">⚠ 주의</span>
+        <div class="flex-1 text-xs text-gray-500">초기 4~6주 금지. 적응 후 가능하나 주의</div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm p-3 flex items-start gap-3">
+        <div class="flex-1 text-xs text-gray-800">아젤리아 + 나이아신아마이드 20%</div>
+        <span class="flex-shrink-0 inline-block bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✓ 가능</span>
+        <div class="flex-1 text-xs text-gray-500">홍조·잡티 시너지. 병용 가능</div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm p-3 flex items-start gap-3">
+        <div class="flex-1 text-xs text-gray-800">아젤리아 + 어성초 세럼</div>
+        <span class="flex-shrink-0 inline-block bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✓ 가능</span>
+        <div class="flex-1 text-xs text-gray-500">항균 효과 중복 강화</div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm p-3 flex items-start gap-3">
+        <div class="flex-1 text-xs text-gray-800">아젤리아 + 파티마겔</div>
+        <span class="flex-shrink-0 inline-block bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✓ 가능</span>
+        <div class="flex-1 text-xs text-gray-500">아젤리아(로션 전) → 로션 → 파티마겔(스팟) 순서 유지</div>
+      </div>
     </div>
   </div>
 </div>
