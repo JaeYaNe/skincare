@@ -16,6 +16,14 @@ tailwind.config = {
 <style>
   body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; }
   .tab-pane { display: none; }
+  .tab-bar-wrap { position: relative; }
+  .tab-bar-wrap::after {
+    content: "";
+    position: absolute; right: 0; top: 0; bottom: 0;
+    width: 40px;
+    background: linear-gradient(to right, transparent, #fff8f9);
+    pointer-events: none;
+  }
   .tab-pane.active { display: block; }
   .am .step-num { background: #fff3cd; color: #f57c00; }
   .pm .step-num { background: #e8eaf6; color: #3949ab; }
@@ -27,17 +35,17 @@ tailwind.config = {
 <div class="bg-gradient-to-b from-[#fce4ec] to-[#fff8f9] px-4 pt-10 pb-8 text-center">
   <h1 class="text-2xl font-extrabold text-[#e8507a] tracking-tight">수부지 스킨케어 플랜</h1>
   <div class="grid grid-cols-3 gap-2 mt-6 max-w-lg mx-auto">
-    <div class="bg-white/60 backdrop-blur rounded-2xl p-3 shadow-sm">
-      <div class="text-[10px] font-semibold text-[#e8507a] uppercase tracking-wide">피부 타입</div>
+    <div class="bg-white/60 backdrop-blur rounded-2xl p-3 shadow-sm min-h-[110px] flex flex-col justify-center">
+      <div class="text-[10px] font-semibold text-[#e8507a] uppercase tracking-wide">피부 타입</div></div>
       <div class="text-sm font-extrabold mt-1 text-gray-800">수분부족형 지성</div>
       <div class="text-[11px] text-gray-500 mt-0.5">T존 피지 과다 + U존 건조</div>
     </div>
-    <div class="bg-white/60 backdrop-blur rounded-2xl p-3 shadow-sm">
+    <div class="bg-white/60 backdrop-blur rounded-2xl p-3 shadow-sm min-h-[110px] flex flex-col justify-center">
       <div class="text-[10px] font-semibold text-[#e8507a] uppercase tracking-wide">핵심 문제</div>
       <div class="text-sm font-extrabold mt-1 text-gray-800">홍조 · 여드름 트러블</div>
       <div class="text-[11px] text-gray-500 mt-0.5">중안부 홍조, 여드름 트러블, 모공 확장</div>
     </div>
-    <div class="bg-white/60 backdrop-blur rounded-2xl p-3 shadow-sm">
+    <div class="bg-white/60 backdrop-blur rounded-2xl p-3 shadow-sm min-h-[110px] flex flex-col justify-center">
       <div class="text-[10px] font-semibold text-[#e8507a] uppercase tracking-wide">핵심 솔루션</div>
       <div class="text-sm font-extrabold mt-1 text-gray-800">시카 + BHA + 판테놀</div>
       <div class="text-[11px] text-gray-500 mt-0.5">진정·항균·장벽강화 3-트랙</div>
@@ -46,19 +54,19 @@ tailwind.config = {
 </div>
 
 <!-- TAB NAV -->
-<div class="flex gap-1 px-4 pt-4 overflow-x-auto -webkit-overflow-scrolling-touch max-w-4xl mx-auto">
+<div class="tab-bar-wrap relative"><div class="flex gap-1 px-4 pt-4 overflow-x-auto max-w-4xl mx-auto pb-0">
   <button class="tab-btn flex-shrink-0 px-4 py-2 rounded-t-xl text-sm font-semibold cursor-pointer border-none transition-colors duration-200" data-tab="diagnosis" style="background:#e8507a;color:white;">🔍 피부진단</button>
   <button class="tab-btn flex-shrink-0 px-4 py-2 rounded-t-xl text-sm font-semibold cursor-pointer border-none bg-[#f0e0e5] text-gray-500 transition-colors duration-200" data-tab="routine">📋 루틴</button>
   <button class="tab-btn flex-shrink-0 px-4 py-2 rounded-t-xl text-sm font-semibold cursor-pointer border-none bg-[#f0e0e5] text-gray-500 transition-colors duration-200" data-tab="products">🛒 제품쇼핑</button>
   <button class="tab-btn flex-shrink-0 px-4 py-2 rounded-t-xl text-sm font-semibold cursor-pointer border-none bg-[#f0e0e5] text-gray-500 transition-colors duration-200" data-tab="schedule">📅 집중케어</button>
   <button class="tab-btn flex-shrink-0 px-4 py-2 rounded-t-xl text-sm font-semibold cursor-pointer border-none bg-[#f0e0e5] text-gray-500 transition-colors duration-200" data-tab="ingredients">⚗️ 성분가이드</button>
-</div>
+</div></div>
 
 <div class="max-w-4xl mx-auto px-4 pb-16">
 
 <!-- TAB1: 피부진단 -->
 <div class="tab-pane active" id="diagnosis">
-  <div class="mb-10 pt-6">
+  <div class="mb-10 pt-1">
     <h2 class="text-lg font-extrabold text-[#e8507a] border-l-4 border-[#e8507a] pl-3 mb-4">피부 현황 분석</h2>
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
       <div class="bg-white rounded-2xl p-4 shadow-md border-t-4 border-[#e8507a]">
@@ -118,7 +126,7 @@ tailwind.config = {
 
 <!-- TAB2: 루틴 -->
 <div class="tab-pane" id="routine">
-  <div class="mb-10 pt-6">
+  <div class="mb-10 pt-1">
     <h2 class="text-lg font-extrabold text-[#e8507a] border-l-4 border-[#e8507a] pl-3 mb-4">추천 스킨케어 루틴</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <!-- AM -->
@@ -188,11 +196,9 @@ tailwind.config = {
     </div>
   </div>
 
-  </div>
-
 <!-- TAB3: 제품쇼핑 -->
 <div class="tab-pane" id="products">
-  <div class="mb-10 pt-6">
+  <div class="mb-10 pt-1">
     <h2 class="text-lg font-extrabold text-[#e8507a] border-l-4 border-[#e8507a] pl-3 mb-4">현재 보유 제품 + 추천 제품</h2>
     <!-- 필터 버튼 -->
     <div class="flex flex-wrap gap-2 mb-5">
@@ -210,7 +216,7 @@ tailwind.config = {
     <div class="sub-header text-sm font-bold text-[#7a3a3a] bg-[#fce8e8] rounded-xl px-3 py-2 mb-3 flex items-center gap-2" data-cat="owned">📦 현재 보유 제품</div>
     <div class="products-grid grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="owned">
-        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/bringgreen_foam.jpg" alt="브링그린 클렌징폼" loading="lazy"></div>
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/bringgreen_foam.jpg" alt="브링그린 클렌징폼" loading="lazy"></div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">브링그린</div>
           <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">티트리 시카 딥클렌징폼</div>
@@ -219,7 +225,7 @@ tailwind.config = {
         </div>
       </div>
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="owned">
-        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/pdrn.jpg" alt="PDRN 토너" loading="lazy"></div>
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/pdrn.jpg" alt="PDRN 토너" loading="lazy"></div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">다이소 구매</div>
           <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">PDRN 토너 (1차 스킨)</div>
@@ -229,7 +235,7 @@ tailwind.config = {
         </div>
       </div>
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="owned">
-        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/wellage.jpg" alt="웰라주 히알루론산 앰플" loading="lazy"></div>
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/wellage.jpg" alt="웰라주 히알루론산 앰플" loading="lazy"></div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">웰라주</div>
           <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">히알루론산 앰플</div>
@@ -238,7 +244,7 @@ tailwind.config = {
         </div>
       </div>
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="owned">
-        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/dermafactory_niacinamide.jpg" alt="더마팩토리 나이아신아마이드 20%" loading="lazy"></div>
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/dermafactory_niacinamide.jpg" alt="더마팩토리 나이아신아마이드 20%" loading="lazy"></div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">더마팩토리</div>
           <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">나이아신아마이드 20% 세럼</div>
@@ -248,7 +254,7 @@ tailwind.config = {
         </div>
       </div>
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="owned">
-        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/greentomato_pore.jpg" alt="그린토마토 모공 앰플" loading="lazy"></div>
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/greentomato_pore.jpg" alt="그린토마토 모공 앰플" loading="lazy"></div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">성분에디터</div>
           <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">그린토마토 NMN 포어 앰플</div>
@@ -257,7 +263,7 @@ tailwind.config = {
         </div>
       </div>
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="owned">
-        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/ongrediants.jpg" alt="온그리디언츠 로션" loading="lazy"></div>
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/ongrediants.jpg" alt="온그리디언츠 로션" loading="lazy"></div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">온그리디언츠</div>
           <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">로션 (마무리 보습)</div>
@@ -271,7 +277,7 @@ tailwind.config = {
     <div class="sub-header text-sm font-bold text-[#7a3a3a] bg-[#fce8e8] rounded-xl px-3 py-2 mb-3 flex items-center gap-2" data-cat="cica">🌿 시카 (Cica) — 홍조 진정·장벽 강화</div>
     <div class="products-grid grid grid-cols-2 sm:grid-cols-3 gap-3 mb-2">
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="cica">
-        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/bringgreen_toner.jpg" alt="브링그린 티트리 시카 수딩 토너" loading="lazy"></div>
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/bringgreen_toner.jpg" alt="브링그린 티트리 시카 수딩 토너" loading="lazy"></div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">브링그린</div>
           <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">티트리 시카 수딩 토너 500ml</div>
@@ -282,7 +288,7 @@ tailwind.config = {
         </div>
       </div>
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="cica">
-        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/aestura_toner.jpg" alt="에스트라 에이시카365 수분토너" loading="lazy"></div>
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/aestura_toner.jpg" alt="에스트라 에이시카365 수분토너" loading="lazy"></div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">에스트라</div>
           <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">에이시카365 수분토너 pH4.5 200ml</div>
@@ -292,7 +298,7 @@ tailwind.config = {
         </div>
       </div>
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="cica">
-        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/roundlab_toner.jpg" alt="라운드랩 소나무 진정 시카 토너" loading="lazy"></div>
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/roundlab_toner.jpg" alt="라운드랩 소나무 진정 시카 토너" loading="lazy"></div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">라운드랩</div>
           <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">소나무 진정 시카 토너 250ml</div>
@@ -302,7 +308,7 @@ tailwind.config = {
         </div>
       </div>
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="cica">
-        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/physiogel_toner.jpg" alt="피지오겔 레드수딩 시카밸런스 토너" loading="lazy"></div>
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/physiogel_toner.jpg" alt="피지오겔 레드수딩 시카밸런스 토너" loading="lazy"></div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">피지오겔</div>
           <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">레드수딩 시카밸런스 토너 200ml</div>
@@ -319,7 +325,7 @@ tailwind.config = {
     <div class="sub-header text-sm font-bold text-[#7a3a3a] bg-[#fce8e8] rounded-xl px-3 py-2 mb-3 flex items-center gap-2" data-cat="houttuynia">🌱 어성초 (Houttuynia) — 여드름 트러블 항균</div>
     <div class="products-grid grid grid-cols-2 sm:grid-cols-3 gap-3 mb-2">
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="houttuynia">
-        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/anua_serum.png" alt="아누아 어성초 77 세럼" loading="lazy"></div>
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/anua_serum.png" alt="아누아 어성초 77 세럼" loading="lazy"></div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">아누아</div>
           <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">어성초77 B3징크 트러블 세럼 더블기획</div>
@@ -330,7 +336,7 @@ tailwind.config = {
         </div>
       </div>
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="houttuynia">
-        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/abib_serum.png" alt="아비브 어성초 테카 캡슐 세럼" loading="lazy"></div>
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/abib_serum.png" alt="아비브 어성초 테카 캡슐 세럼" loading="lazy"></div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">아비브</div>
           <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">어성초 테카 캡슐 세럼 더블기획 50ml</div>
@@ -341,7 +347,7 @@ tailwind.config = {
         </div>
       </div>
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="houttuynia">
-        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/goodal_serum.jpg" alt="구달 어성초 징크 세럼" loading="lazy"></div>
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/goodal_serum.jpg" alt="구달 어성초 징크 세럼" loading="lazy"></div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">구달</div>
           <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">어성초 징크 히알루론 레드 수딩 세럼 30ml</div>
@@ -358,7 +364,7 @@ tailwind.config = {
     <div class="sub-header text-sm font-bold text-[#7a3a3a] bg-[#fce8e8] rounded-xl px-3 py-2 mb-3 flex items-center gap-2" data-cat="panthenol">💊 판테놀 (비타민B5) — 피부 장벽 강화</div>
     <div class="products-grid grid grid-cols-2 sm:grid-cols-3 gap-3 mb-2">
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="panthenol">
-        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/dermatory_ampoule.jpg" alt="더마토리 히알샷 배리어 앰플 비5" loading="lazy"></div>
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/dermatory_ampoule.jpg" alt="더마토리 히알샷 배리어 앰플 비5" loading="lazy"></div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">더마토리</div>
           <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">히알샷 배리어 앰플 비5 100ml 기획</div>
@@ -369,7 +375,7 @@ tailwind.config = {
         </div>
       </div>
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="panthenol">
-        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/pation_serum.jpg" alt="파티온 노스카나인 트러블 세럼" loading="lazy"></div>
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/pation_serum.jpg" alt="파티온 노스카나인 트러블 세럼" loading="lazy"></div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">파티온</div>
           <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">노스카나인 트러블 세럼 리필기획 50ml</div>
@@ -386,7 +392,7 @@ tailwind.config = {
     <div class="sub-header text-sm font-bold text-[#7a3a3a] bg-[#fce8e8] rounded-xl px-3 py-2 mb-3 flex items-center gap-2" data-cat="bha">🧴 BHA + 시카 패드 — 모공·각질 집중</div>
     <div class="products-grid grid grid-cols-2 sm:grid-cols-3 gap-3 mb-2">
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="bha">
-        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/celimax_pad.png" alt="셀리맥스 시카바하 블레미쉬 패드" loading="lazy"></div>
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/celimax_pad.png" alt="셀리맥스 시카바하 블레미쉬 패드" loading="lazy"></div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">셀리맥스</div>
           <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">지우개 시카 바하 블레미쉬 패드 기획 120매</div>
@@ -397,7 +403,7 @@ tailwind.config = {
         </div>
       </div>
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="bha">
-        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/cosrx_pad.jpg" alt="코스알엑스 원스텝 패드" loading="lazy"></div>
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/cosrx_pad.jpg" alt="코스알엑스 원스텝 패드" loading="lazy"></div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">코스알엑스</div>
           <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">원스텝 오리지널 패드 100매</div>
@@ -415,7 +421,7 @@ tailwind.config = {
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="sunscreen">
         <div class="img-wrap aspect-square overflow-hidden bg-gray-50">
           <a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000149135" target="_blank">
-            <img class="w-full h-full object-cover" src="images/roundlab_sun.jpg" alt="라운드랩 자작나무 수분 선크림" loading="lazy">
+            <img class="w-full h-full object-contain" src="images/roundlab_sun.jpg" alt="라운드랩 자작나무 수분 선크림" loading="lazy">
           </a>
         </div>
         <div class="p-3">
@@ -429,7 +435,7 @@ tailwind.config = {
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="sunscreen">
         <div class="img-wrap aspect-square overflow-hidden bg-gray-50">
           <a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000173774" target="_blank">
-            <img class="w-full h-full object-cover" src="images/torriden_sun.jpg" alt="토리든 다이브인 선크림" loading="lazy">
+            <img class="w-full h-full object-contain" src="images/torriden_sun.jpg" alt="토리든 다이브인 선크림" loading="lazy">
           </a>
         </div>
         <div class="p-3">
@@ -445,7 +451,7 @@ tailwind.config = {
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="sunscreen">
         <div class="img-wrap aspect-square overflow-hidden bg-gray-50">
           <a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000181078" target="_blank">
-            <img class="w-full h-full object-cover" src="images/aestura_sun.jpg" alt="에스트라 더마UV365 선크림" loading="lazy">
+            <img class="w-full h-full object-contain" src="images/aestura_sun.jpg" alt="에스트라 더마UV365 선크림" loading="lazy">
           </a>
         </div>
         <div class="p-3">
@@ -458,7 +464,7 @@ tailwind.config = {
       </div>
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="sunscreen">
         <div class="img-wrap aspect-square overflow-hidden bg-gray-50">
-          <img class="w-full h-full object-cover" src="images/mediheal.jpg" alt="메디힐 마데카소사이드 선세럼" loading="lazy">
+          <img class="w-full h-full object-contain" src="images/mediheal.jpg" alt="메디힐 마데카소사이드 선세럼" loading="lazy">
         </div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">메디힐</div>
@@ -470,7 +476,7 @@ tailwind.config = {
       </div>
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="sunscreen">
         <div class="img-wrap aspect-square overflow-hidden bg-gray-50">
-          <img class="w-full h-full object-cover" src="images/innisfree.jpg" alt="이니스프리 트루 마일드 시카 선크림" loading="lazy">
+          <img class="w-full h-full object-contain" src="images/innisfree.jpg" alt="이니스프리 트루 마일드 시카 선크림" loading="lazy">
         </div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">이니스프리</div>
@@ -483,7 +489,7 @@ tailwind.config = {
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="sunscreen">
         <div class="img-wrap aspect-square overflow-hidden bg-gray-50">
           <a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000219554" target="_blank">
-            <img class="w-full h-full object-cover" src="images/gudal_sun.jpg" alt="구달 맑은 어성초 수분 선크림" loading="lazy">
+            <img class="w-full h-full object-contain" src="images/gudal_sun.jpg" alt="구달 맑은 어성초 수분 선크림" loading="lazy">
           </a>
         </div>
         <div class="p-3">
@@ -500,7 +506,7 @@ tailwind.config = {
     <div class="sub-header text-sm font-bold text-[#7a3a3a] bg-[#fce8e8] rounded-xl px-3 py-2 mb-3 flex items-center gap-2" data-cat="rx">💊 일반의약품 (약국 구매)</div>
     <div class="products-grid grid grid-cols-2 sm:grid-cols-3 gap-3">
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="rx">
-        <div class="img-wrap aspect-square overflow-hidden bg-white"><img class="w-full h-full object-cover" src="images/fatima.png" alt="파티마겔" loading="lazy"></div>
+        <div class="img-wrap aspect-square overflow-hidden bg-white"><img class="w-full h-full object-contain" src="images/fatima.png" alt="파티마겔" loading="lazy"></div>
         <div class="p-3">
           <div class="text-xs font-bold" style="color:#c62828;">약국 전용</div>
           <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">파티마겔 (과산화벤조일)</div>
@@ -510,13 +516,13 @@ tailwind.config = {
         </div>
       </div>
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="rx">
-        <div class="img-wrap aspect-square overflow-hidden bg-white"><img class="w-full h-full object-cover" src="images/azalea.png" alt="아젤리아 크림" loading="lazy"></div>
+        <div class="img-wrap aspect-square overflow-hidden bg-white"><img class="w-full h-full object-contain" src="images/azalea.png" alt="아젤리아 크림" loading="lazy"></div>
         <div class="p-3">
           <div class="text-xs font-bold" style="color:#7b1fa2;">약국 전용</div>
           <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">아젤리아 (아젤라산)</div>
           <div class="text-xs text-gray-500 mt-1">Azelaic Acid · 항균·항염·홍조</div>
           <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-pink-100 text-red-800">의약품</span>
-          <div class="text-[11px] text-gray-500 mt-1.5 leading-relaxed">사용법: 로션 전 홍조·여드름 부위<br>주 2~3회 (A일·C일) · BHA 날 금지<br>홍조+화농성 동시 케어</div>
+          <div class="text-[11px] text-gray-500 mt-1.5 leading-relaxed">사용법: 로션 전 홍조·여드름 부위<br>주 2~3회 (A일·C일) · BHA 날 금지<br>홍조·여드름 트러블 동시 케어</div>
         </div>
       </div>
     </div>
@@ -525,7 +531,7 @@ tailwind.config = {
 
 <!-- TAB4: 집중케어 -->
 <div class="tab-pane" id="schedule">
-  <div class="mb-10 pt-6">
+  <div class="mb-10 pt-1">
     <h2 class="text-lg font-extrabold text-[#e8507a] border-l-4 border-[#e8507a] pl-3 mb-4">PM 집중 케어 — 격일 교차 스케줄</h2>
     <div class="overflow-x-auto -mx-4 px-4">
       <table class="w-full border-collapse bg-white rounded-2xl overflow-hidden shadow-md" style="min-width:520px;">
@@ -560,7 +566,7 @@ tailwind.config = {
 
 <!-- TAB5: 성분가이드 -->
 <div class="tab-pane" id="ingredients">
-  <div class="mb-10 pt-6">
+  <div class="mb-10 pt-1">
     <h2 class="text-lg font-extrabold text-[#e8507a] border-l-4 border-[#e8507a] pl-3 mb-4">성분 충돌 &amp; 병용 가이드</h2>
     <div class="overflow-x-auto -mx-4 px-4">
       <table class="w-full border-collapse bg-white rounded-2xl overflow-hidden shadow-md">
