@@ -58,8 +58,7 @@ tailwind.config = {
   <button class="tab-btn flex-shrink-0 px-4 py-2 rounded-t-xl text-sm font-semibold cursor-pointer border-none transition-colors duration-200" data-tab="diagnosis" style="background:#e8507a;color:white;">🔍 피부진단</button>
   <button class="tab-btn flex-shrink-0 px-4 py-2 rounded-t-xl text-sm font-semibold cursor-pointer border-none bg-[#f0e0e5] text-gray-500 transition-colors duration-200" data-tab="routine">📋 루틴</button>
   <button class="tab-btn flex-shrink-0 px-4 py-2 rounded-t-xl text-sm font-semibold cursor-pointer border-none bg-[#f0e0e5] text-gray-500 transition-colors duration-200" data-tab="products">🛒 제품쇼핑</button>
-  <button class="tab-btn flex-shrink-0 px-4 py-2 rounded-t-xl text-sm font-semibold cursor-pointer border-none bg-[#f0e0e5] text-gray-500 transition-colors duration-200" data-tab="schedule">📅 집중케어</button>
-  <button class="tab-btn flex-shrink-0 px-4 py-2 rounded-t-xl text-sm font-semibold cursor-pointer border-none bg-[#f0e0e5] text-gray-500 transition-colors duration-200" data-tab="ingredients">⚗️ 성분가이드</button>
+<button class="tab-btn flex-shrink-0 px-4 py-2 rounded-t-xl text-sm font-semibold cursor-pointer border-none bg-[#f0e0e5] text-gray-500 transition-colors duration-200" data-tab="ingredients">⚗️ 성분가이드</button>
 </div></div>
 
 <div class="max-w-4xl mx-auto px-4 pb-16">
@@ -319,6 +318,19 @@ tailwind.config = {
           <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-purple-100 text-purple-700">★ 홍조픽</span>
         </div>
       </div>
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="cica">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50 flex items-center justify-center">
+          <a href="https://oy.run/jdrnRewWVyct2u" target="_blank" class="w-full h-full flex items-center justify-center">
+            <span class="text-[11px] font-bold text-gray-400 text-center px-2">라로슈포제<br>시카플라스트 밤 B5+</span>
+          </a>
+        </div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">라로슈포제</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">시카플라스트 밤 B5+ 100ml 기획</div>
+          <div class="text-xs text-gray-500 mt-1">판테놀B5 · 알란토인 · 시카 장벽 강화</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-green-100 text-green-700">장벽 강화</span>
+        </div>
+      </div>
     </div>
     <div class="bg-amber-50 border-l-4 border-amber-400 rounded-r-xl px-4 py-3 mb-5 text-sm text-amber-900">→ 예산 적으면 <strong>브링그린 티트리 시카 토너</strong>, 홍조 심하면 <strong>피지오겔 레드수딩</strong></div>
 
@@ -529,31 +541,7 @@ tailwind.config = {
   </div>
 </div>
 
-<!-- TAB4: 집중케어 -->
-<div class="tab-pane" id="schedule">
-  <div class="mb-10 pt-1">
-    <h2 class="text-lg font-extrabold text-[#e8507a] border-l-4 border-[#e8507a] pl-3 mb-4">PM 집중 케어 — 격일 교차 스케줄</h2>
-    <div class="space-y-3">
-      <div class="bg-white rounded-2xl shadow-md p-4 border-l-4 border-[#e91e63]">
-        <div class="text-xs font-bold text-[#e91e63] mb-1">A일 (월·수·금)</div>
-        <div class="text-xs font-semibold text-gray-800 mb-1">더마팩토리 <strong>나이아신아마이드 20%</strong> + 아젤리아 스팟 가능</div>
-        <div class="text-xs text-gray-500">나이아신 도포 후 10분 대기. 아젤리아 → 로션 → 파티마겔 순서</div>
-      </div>
-      <div class="bg-white rounded-2xl shadow-md p-4 border-l-4 border-[#2196f3]">
-        <div class="text-xs font-bold text-[#2196f3] mb-1">B일 (화·목·토)</div>
-        <div class="text-xs font-semibold text-gray-800 mb-1"><strong>BHA 패드 (셀리맥스)</strong></div>
-        <div class="text-xs text-gray-500">T존·나비존 닦아내기. 아젤리아·파티마겔 <span class="text-red-600 font-bold">모두 금지</span></div>
-      </div>
-      <div class="bg-white rounded-2xl shadow-md p-4 border-l-4 border-[#4caf50]">
-        <div class="text-xs font-bold text-[#4caf50] mb-1">C일 (일)</div>
-        <div class="text-xs font-semibold text-gray-800 mb-1">피부 휴식 + 아젤리아 스팟 + 파티마겔 스팟 가능</div>
-        <div class="text-xs text-gray-500">팩 or 보습 집중. 아젤리아 → 로션 → 파티마겔 순서 유지</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- TAB5: 성분가이드 -->
+<!-- TAB4: 성분가이드 -->
 <div class="tab-pane" id="ingredients">
   <div class="mb-10 pt-1">
     <h2 class="text-lg font-extrabold text-[#e8507a] border-l-4 border-[#e8507a] pl-3 mb-4">성분 충돌 &amp; 병용 가이드</h2>
