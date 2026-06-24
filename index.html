@@ -1,436 +1,584 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>수부지 스킨케어 플랜 (리디자인)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  safelist: [
+    'bg-[#e8507a]', 'text-white', 'bg-gray-100', 'text-gray-500',
+    'bg-[#fff8f9]', 'text-[#e8507a]'
+  ]
+}
+</script>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: #fff8f9; color: #2d2d2d; line-height: 1.6; font-size: 14px; }
-  .hero { background: linear-gradient(135deg, #e8507a 0%, #f07095 50%, #f4a0b8 100%); padding: 52px 24px 40px; text-align: center; color: white; }
-  .hero h1 { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; }
-  .hero p { margin-top: 8px; font-size: 14px; opacity: 0.9; }
-  .hero-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 700px; margin: 24px auto 0; }
-  .hero-card { background: rgba(255,255,255,0.2); border-radius: 14px; padding: 16px 12px; backdrop-filter: blur(4px); }
-  .hc-label { font-size: 11px; opacity: 0.85; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-  .hc-value { font-size: 15px; font-weight: 800; margin: 4px 0; }
-  .hc-desc { font-size: 12px; opacity: 0.8; }
-  .quick-action { background: #fff3f6; border-top: 3px solid #e8507a; padding: 24px 20px; }
-  .quick-title { font-size: 18px; font-weight: 800; color: #e8507a; margin-bottom: 16px; text-align: center; }
-  .quick-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 700px; margin: 0 auto; }
-  .quick-card { background: white; border-radius: 14px; padding: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); display: flex; flex-direction: column; gap: 6px; }
-  .q-num { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #e8507a, #f4a0b8); color: white; font-weight: 800; font-size: 16px; display: flex; align-items: center; justify-content: center; }
-  .q-title { font-weight: 700; font-size: 14px; }
-  .q-reason { font-size: 12px; color: #888; }
-  .warn-banner { background: #fff3e0; border-left: 4px solid #e65100; border-radius: 0 10px 10px 0; padding: 12px 16px; margin: 12px auto 0; max-width: 700px; font-size: 13px; color: #5d4037; }
-  .warn-banner strong { color: #e65100; }
-  .container { max-width: 960px; margin: 0 auto; padding: 0 16px 60px; }
-  .tab-nav { display: flex; gap: 4px; padding: 16px 16px 0; max-width: 960px; margin: 0 auto; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .tab-btn { flex-shrink: 0; padding: 10px 18px; border: none; border-radius: 12px 12px 0 0; font-size: 14px; font-weight: 600; cursor: pointer; background: #f0e0e5; color: #888; transition: all 0.2s; font-family: inherit; }
-  .tab-btn.active { background: #e8507a; color: white; }
-  .tab-btn:hover:not(.active) { background: #f9c5d3; color: #e8507a; }
-  .tab-pane { display: none; padding: 24px 0; }
+  body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; }
+  .tab-pane { display: none; }
   .tab-pane.active { display: block; }
-  .section { margin-bottom: 40px; }
-  .section-title { font-size: 18px; font-weight: 800; color: #e8507a; border-left: 4px solid #e8507a; padding-left: 12px; margin-bottom: 16px; }
-  .section-sub { font-size: 12px; color: #888; margin-top: 2px; font-weight: 400; }
-  .analysis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
-  .analysis-card { background: white; border-radius: 14px; padding: 18px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); border-top: 3px solid #e8507a; }
-  .analysis-card .label { font-size: 11px; color: #e8507a; font-weight: 700; text-transform: uppercase; }
-  .analysis-card .value { font-size: 15px; font-weight: 700; margin-top: 4px; }
-  .ingredient-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
-  .ingredient-card { background: white; border-radius: 14px; padding: 16px 18px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); display: flex; align-items: flex-start; gap: 10px; }
-  .ingredient-card .priority { font-size: 1rem; min-width: 22px; }
-  .ingredient-card .info .name { font-weight: 700; font-size: 14px; color: #e8507a; }
-  .ingredient-card .info .desc { font-size: 12px; color: #888; margin-top: 2px; }
-  .routine-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .routine-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
-  .routine-card .r-header { padding: 14px 20px; font-weight: 800; font-size: 15px; color: white; }
-  .routine-card.am .r-header { background: linear-gradient(90deg, #f9a825, #fb8c00); }
-  .routine-card.pm .r-header { background: linear-gradient(90deg, #5c6bc0, #3949ab); }
-  .routine-step { display: flex; align-items: flex-start; gap: 12px; padding: 10px 18px; border-bottom: 1px solid #f5f5f5; }
-  .routine-step:last-child { border-bottom: none; }
-  .step-num { width: 26px; height: 26px; border-radius: 50%; font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
   .am .step-num { background: #fff3cd; color: #f57c00; }
   .pm .step-num { background: #e8eaf6; color: #3949ab; }
-  .step-info .step-product { font-size: 14px; font-weight: 600; }
-  .step-info .step-note { font-size: 12px; color: #888; margin-top: 1px; }
-  .step-new { color: #e91e63; font-size: 11px; font-weight: 700; margin-left: 4px; }
-  .step-cond { color: #9c27b0; font-size: 11px; font-weight: 700; margin-left: 4px; }
-  .filter-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-  .filter-btn { padding: 7px 16px; border: 2px solid #e8507a; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; background: white; color: #e8507a; transition: all 0.2s; font-family: inherit; }
-  .filter-btn.active, .filter-btn:hover { background: #e8507a; color: white; }
-  .sub-header { font-size: 14px; font-weight: 700; color: #7a3a3a; background: #fce8e8; border-radius: 10px; padding: 8px 14px; margin: 20px 0 12px; display: flex; align-items: center; gap: 8px; }
-  .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
-  .product-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.08); transition: transform 0.2s, box-shadow 0.2s; }
-  .product-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
-  .product-card .img-wrap { width: 100%; aspect-ratio: 1/1; background: #fdf0f0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-  .product-card .img-wrap img { width: 100%; height: 100%; object-fit: cover; }
-  .product-card .card-body { padding: 12px; }
-  .product-card .brand { font-size: 11px; color: #e8507a; font-weight: 700; }
-  .product-card .name { font-size: 13px; font-weight: 600; margin-top: 2px; line-height: 1.35; }
-  .product-card .key-ing { font-size: 11px; color: #aaa; margin-top: 3px; }
-  .product-card .price { font-size: 13px; font-weight: 700; color: #e8507a; margin-top: 4px; }
-  .product-card .price .original { text-decoration: line-through; color: #bbb; font-size: 11px; font-weight: 400; margin-right: 4px; }
-  .tag { display: inline-block; font-size: 11px; padding: 2px 7px; border-radius: 10px; margin-top: 5px; font-weight: 600; margin-right: 2px; }
-  .tag-owned { background: #e8f5e9; color: #4caf50; }
-  .tag-rec { background: #fff3e0; color: #f57c00; }
-  .tag-rx { background: #fce4ec; color: #c62828; }
-  .tag-pick { background: #f3e5f5; color: #7b1fa2; }
-  .tag-nodaiso { background: #e3f2fd; color: #1565c0; }
-  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 14px; }
-  .schedule-table, .conflict-table { width: 100%; border-collapse: collapse; background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
-  .table-wrap .schedule-table, .table-wrap .conflict-table { border-radius: 0; min-width: 520px; }
-  .schedule-table th, .schedule-table td, .conflict-table th, .conflict-table td { padding: 11px 14px; font-size: 13px; text-align: left; border-bottom: 1px solid #f0f0f0; }
-  .schedule-table th, .conflict-table th { background: #fce8e8; color: #b85c5c; font-weight: 700; }
-  .schedule-table tr:last-child td, .conflict-table tr:last-child td { border-bottom: none; }
-  .day-a { color: #e91e63; font-weight: 700; }
-  .day-b { color: #2196f3; font-weight: 700; }
-  .day-c { color: #4caf50; font-weight: 700; }
-  .ok-chip { background: #e8f5e9; color: #2e7d32; font-weight: 700; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
-  .warn-chip { background: #fff8e1; color: #f57c00; font-weight: 700; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
-  .danger-chip { background: #fce4ec; color: #e53935; font-weight: 700; padding: 2px 8px; border-radius: 10px; font-size: 12px; }
-  .ok { color: #4caf50; font-weight: 700; }
-  .warn { color: #f57c00; font-weight: 700; }
-  .danger { color: #e53935; font-weight: 700; }
-  .priority-list { list-style: none; }
-  .priority-list li { background: white; border-radius: 12px; padding: 14px 18px; margin-bottom: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 14px; }
-  .pri-num { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, #e8507a, #f4a0b8); color: white; font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .pri-text .pri-title { font-weight: 700; font-size: 14px; }
-  .pri-text .pri-reason { font-size: 12px; color: #888; margin-top: 2px; }
-  .warn-box { background: #fff8e1; border-left: 4px solid #ffc107; border-radius: 0 10px 10px 0; padding: 12px 16px; margin-top: 14px; font-size: 13px; color: #5d4037; }
-  .warn-box strong { color: #e65100; }
-  footer { text-align: center; padding: 24px; font-size: 12px; color: #bbb; }
-  @media (max-width: 720px) {
-    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .quick-cards { grid-template-columns: 1fr; }
-    .hero-cards { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 480px) {
-    .hero h1 { font-size: 20px; }
-    .tab-btn { padding: 8px 12px; font-size: 12px; }
-    .routine-wrap { grid-template-columns: 1fr; }
-    .analysis-grid { grid-template-columns: repeat(2, 1fr); }
-    .ingredient-grid { grid-template-columns: 1fr; }
-    .section-title { font-size: 16px; }
-  }
-  @media (max-width: 360px) {
-    .hero h1 { font-size: 18px; }
-    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-  }
 </style>
 </head>
-<body>
+<body class="bg-[#fff8f9] text-[#2d2d2d] text-sm leading-relaxed">
 
 <!-- HERO -->
-<div class="hero">
-  <h1>수부지 스킨케어 플랜</h1>
-  <p>2026-06-24 업데이트 · 15년차 피부관리전문가 분석</p>
-  <div class="hero-cards">
-    <div class="hero-card">
-      <div class="hc-label">피부 타입</div>
-      <div class="hc-value">수분부족형 지성</div>
-      <div class="hc-desc">T존 피지 과다 + U존 건조</div>
+<div class="bg-gradient-to-b from-[#fce4ec] to-[#fff8f9] px-4 pt-10 pb-8 text-center">
+  <h1 class="text-2xl font-extrabold text-[#e8507a] tracking-tight">수부지 스킨케어 플랜</h1>
+  <p class="text-gray-500 text-sm mt-2">2026-06-24 업데이트 · 15년차 피부관리전문가 분석</p>
+  <div class="grid grid-cols-3 gap-2 mt-6 max-w-lg mx-auto">
+    <div class="bg-white/60 backdrop-blur rounded-2xl p-3 shadow-sm">
+      <div class="text-[10px] font-semibold text-[#e8507a] uppercase tracking-wide">피부 타입</div>
+      <div class="text-sm font-extrabold mt-1 text-gray-800">수분부족형 지성</div>
+      <div class="text-[11px] text-gray-500 mt-0.5">T존 피지 과다 + U존 건조</div>
     </div>
-    <div class="hero-card">
-      <div class="hc-label">핵심 문제</div>
-      <div class="hc-value">홍조 · 화농성 여드름</div>
-      <div class="hc-desc">중안부 홍조, 하관 턱 여드름, 모공 확장</div>
+    <div class="bg-white/60 backdrop-blur rounded-2xl p-3 shadow-sm">
+      <div class="text-[10px] font-semibold text-[#e8507a] uppercase tracking-wide">핵심 문제</div>
+      <div class="text-sm font-extrabold mt-1 text-gray-800">홍조 · 화농성 여드름</div>
+      <div class="text-[11px] text-gray-500 mt-0.5">중안부 홍조, 하관 턱 여드름, 모공 확장</div>
     </div>
-    <div class="hero-card">
-      <div class="hc-label">핵심 솔루션</div>
-      <div class="hc-value">시카 + BHA + 판테놀</div>
-      <div class="hc-desc">진정·항균·장벽강화 3-트랙</div>
+    <div class="bg-white/60 backdrop-blur rounded-2xl p-3 shadow-sm">
+      <div class="text-[10px] font-semibold text-[#e8507a] uppercase tracking-wide">핵심 솔루션</div>
+      <div class="text-sm font-extrabold mt-1 text-gray-800">시카 + BHA + 판테놀</div>
+      <div class="text-[11px] text-gray-500 mt-0.5">진정·항균·장벽강화 3-트랙</div>
     </div>
-  </div>
-</div>
-
-<!-- QUICK ACTION -->
-<div class="quick-action">
-  <div class="quick-title">오늘 당장 사야 할 것 TOP3</div>
-  <div class="quick-cards">
-    <div class="quick-card">
-      <div class="q-num">1</div>
-      <div class="q-title">시카 토너 + 어성초 세럼</div>
-      <div class="q-reason">홍조 + 화농성 여드름 — 두 핵심 문제 동시 해결</div>
-    </div>
-    <div class="quick-card">
-      <div class="q-num">2</div>
-      <div class="q-title">BHA+시카 패드 (셀리맥스)</div>
-      <div class="q-reason">모공 확장 집중 케어</div>
-    </div>
-    <div class="quick-card">
-      <div class="q-num">3</div>
-      <div class="q-title">판테놀 앰플 (더마토리)</div>
-      <div class="q-reason">전체 피부 장벽 강화로 근본 개선</div>
-    </div>
-  </div>
-  <div class="warn-banner">
-    <strong>⚠ 선크림 즉시 추가 필요!</strong> 현재 루틴에 선크림 없음. 아무리 좋은 진정 성분을 발라도 SPF 미적용 시 중안부 홍조 급격 악화. 가벼운 수분 선크림 (SPF50+ PA+++) AM 루틴 마지막 단계 필수.
   </div>
 </div>
 
 <!-- TAB NAV -->
-<div class="tab-nav">
-  <button class="tab-btn active" data-tab="diagnosis">🔍 피부진단</button>
-  <button class="tab-btn" data-tab="routine">📋 루틴</button>
-  <button class="tab-btn" data-tab="products">🛒 제품쇼핑</button>
-  <button class="tab-btn" data-tab="schedule">📅 집중케어</button>
-  <button class="tab-btn" data-tab="ingredients">⚗️ 성분가이드</button>
+<div class="flex gap-1 px-4 pt-4 overflow-x-auto -webkit-overflow-scrolling-touch max-w-4xl mx-auto">
+  <button class="tab-btn flex-shrink-0 px-4 py-2 rounded-t-xl text-sm font-semibold cursor-pointer border-none transition-colors duration-200" data-tab="diagnosis" style="background:#e8507a;color:white;">🔍 피부진단</button>
+  <button class="tab-btn flex-shrink-0 px-4 py-2 rounded-t-xl text-sm font-semibold cursor-pointer border-none bg-[#f0e0e5] text-gray-500 transition-colors duration-200" data-tab="routine">📋 루틴</button>
+  <button class="tab-btn flex-shrink-0 px-4 py-2 rounded-t-xl text-sm font-semibold cursor-pointer border-none bg-[#f0e0e5] text-gray-500 transition-colors duration-200" data-tab="products">🛒 제품쇼핑</button>
+  <button class="tab-btn flex-shrink-0 px-4 py-2 rounded-t-xl text-sm font-semibold cursor-pointer border-none bg-[#f0e0e5] text-gray-500 transition-colors duration-200" data-tab="schedule">📅 집중케어</button>
+  <button class="tab-btn flex-shrink-0 px-4 py-2 rounded-t-xl text-sm font-semibold cursor-pointer border-none bg-[#f0e0e5] text-gray-500 transition-colors duration-200" data-tab="ingredients">⚗️ 성분가이드</button>
 </div>
 
-<div class="container">
+<div class="max-w-4xl mx-auto px-4 pb-16">
 
 <!-- TAB1: 피부진단 -->
 <div class="tab-pane active" id="diagnosis">
-  <div class="section">
-    <div class="section-title">피부 현황 분석</div>
-    <div class="analysis-grid">
-      <div class="analysis-card"><div class="label">피부 타입</div><div class="value">수부지 (수분 부족형 지성)</div></div>
-      <div class="analysis-card"><div class="label">고민 ①</div><div class="value">중안부 홍조</div></div>
-      <div class="analysis-card"><div class="label">고민 ②</div><div class="value">하관·턱 화농성 여드름</div></div>
-      <div class="analysis-card"><div class="label">고민 ③</div><div class="value">T존·나비존 모공 확장</div></div>
+  <div class="mb-10 pt-6">
+    <h2 class="text-lg font-extrabold text-[#e8507a] border-l-4 border-[#e8507a] pl-3 mb-4">피부 현황 분석</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      <div class="bg-white rounded-2xl p-4 shadow-md border-t-4 border-[#e8507a]">
+        <div class="text-[11px] text-[#e8507a] font-bold uppercase">피부 타입</div>
+        <div class="text-sm font-bold mt-1">수부지 (수분 부족형 지성)</div>
+      </div>
+      <div class="bg-white rounded-2xl p-4 shadow-md border-t-4 border-[#e8507a]">
+        <div class="text-[11px] text-[#e8507a] font-bold uppercase">고민 ①</div>
+        <div class="text-sm font-bold mt-1">중안부 홍조</div>
+      </div>
+      <div class="bg-white rounded-2xl p-4 shadow-md border-t-4 border-[#e8507a]">
+        <div class="text-[11px] text-[#e8507a] font-bold uppercase">고민 ②</div>
+        <div class="text-sm font-bold mt-1">하관·턱 화농성 여드름</div>
+      </div>
+      <div class="bg-white rounded-2xl p-4 shadow-md border-t-4 border-[#e8507a]">
+        <div class="text-[11px] text-[#e8507a] font-bold uppercase">고민 ③</div>
+        <div class="text-sm font-bold mt-1">T존·나비존 모공 확장</div>
+      </div>
     </div>
   </div>
-  <div class="section">
-    <div class="section-title">보충 필요 성분 <span class="section-sub">현재 루틴에 없는 핵심 성분</span></div>
-    <div class="ingredient-grid">
-      <div class="ingredient-card"><div class="priority">⭐⭐⭐</div><div class="info"><div class="name">시카 (센텔라 아시아티카)</div><div class="desc">홍조 완화 · 장벽 강화 · 진정</div></div></div>
-      <div class="ingredient-card"><div class="priority">⭐⭐⭐</div><div class="info"><div class="name">어성초 (Houttuynia)</div><div class="desc">항균 · 여드름균 억제 · 항염</div></div></div>
-      <div class="ingredient-card"><div class="priority">⭐⭐</div><div class="info"><div class="name">판테놀 (비타민B5)</div><div class="desc">피부 장벽 강화 · 수분 결합 · 재생</div></div></div>
-      <div class="ingredient-card"><div class="priority">⭐⭐</div><div class="info"><div class="name">BHA (살리실산)</div><div class="desc">모공 속 피지·각질 용해 · 여드름 예방</div></div></div>
+  <div class="mb-10">
+    <h2 class="text-lg font-extrabold text-[#e8507a] border-l-4 border-[#e8507a] pl-3 mb-4">
+      보충 필요 성분 <span class="text-xs text-gray-400 font-normal ml-1">현재 루틴에 없는 핵심 성분</span>
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div class="bg-white rounded-2xl p-4 shadow-md flex items-start gap-3">
+        <div class="text-base min-w-[22px]">⭐⭐⭐</div>
+        <div>
+          <div class="font-bold text-sm text-[#e8507a]">시카 (센텔라 아시아티카)</div>
+          <div class="text-xs text-gray-500 mt-0.5">홍조 완화 · 장벽 강화 · 진정</div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-4 shadow-md flex items-start gap-3">
+        <div class="text-base min-w-[22px]">⭐⭐⭐</div>
+        <div>
+          <div class="font-bold text-sm text-[#e8507a]">어성초 (Houttuynia)</div>
+          <div class="text-xs text-gray-500 mt-0.5">항균 · 여드름균 억제 · 항염</div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-4 shadow-md flex items-start gap-3">
+        <div class="text-base min-w-[22px]">⭐⭐</div>
+        <div>
+          <div class="font-bold text-sm text-[#e8507a]">판테놀 (비타민B5)</div>
+          <div class="text-xs text-gray-500 mt-0.5">피부 장벽 강화 · 수분 결합 · 재생</div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-4 shadow-md flex items-start gap-3">
+        <div class="text-base min-w-[22px]">⭐⭐</div>
+        <div>
+          <div class="font-bold text-sm text-[#e8507a]">BHA (살리실산)</div>
+          <div class="text-xs text-gray-500 mt-0.5">모공 속 피지·각질 용해 · 여드름 예방</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- TAB2: 루틴 -->
 <div class="tab-pane" id="routine">
-  <div class="section">
-    <div class="section-title">추천 스킨케어 루틴</div>
-    <div class="routine-wrap">
-      <div class="routine-card am">
-        <div class="r-header">☀️ AM 루틴 (매일)</div>
-        <div class="routine-step"><div class="step-num am">1</div><div class="step-info"><div class="step-product">브링그린 클렌징폼</div><div class="step-note">미지근한 물, 부드럽게 · 티트리·시카</div></div></div>
-        <div class="routine-step"><div class="step-num am">2</div><div class="step-info"><div class="step-product">PDRN 토너</div><div class="step-note">손바닥 패딩법 권장 · 폴리뉴클레오타이드</div></div></div>
-        <div class="routine-step"><div class="step-num am">3</div><div class="step-info"><div class="step-product">시카 토너 <span class="step-new">NEW</span></div><div class="step-note">중안부 홍조 부위 집중 · 센텔라</div></div></div>
-        <div class="routine-step"><div class="step-num am">4</div><div class="step-info"><div class="step-product">웰라주 히알루론산 앰플</div><div class="step-note">전 얼굴 도포 · 수분 공급</div></div></div>
-        <div class="routine-step"><div class="step-num am">5</div><div class="step-info"><div class="step-product">판테놀 앰플 <span class="step-new">NEW</span></div><div class="step-note">격일 사용 (주 3~4회) · 장벽 강화</div></div></div>
-        <div class="routine-step"><div class="step-num am">6</div><div class="step-info"><div class="step-product">온그리디언츠 로션</div><div class="step-note">전 얼굴 마무리 보습</div></div></div>
-        <div class="routine-step" style="background:#fff8e1;"><div class="step-num am" style="background:#ffe082;color:#e65100;">7</div><div class="step-info"><div class="step-product" style="color:#e65100;">⚠ 선크림 SPF50+ PA+++</div><div class="step-note">미구비 시 홍조·여드름 악화 — 즉시 추가</div></div></div>
+  <div class="mb-10 pt-6">
+    <h2 class="text-lg font-extrabold text-[#e8507a] border-l-4 border-[#e8507a] pl-3 mb-4">추천 스킨케어 루틴</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <!-- AM -->
+      <div class="am bg-white rounded-2xl overflow-hidden shadow-md">
+        <div class="px-5 py-3 font-extrabold text-white text-[15px]" style="background:linear-gradient(90deg,#f9a825,#fb8c00);">☀️ AM 루틴 (매일)</div>
+        <div class="routine-step flex items-start gap-3 px-4 py-2.5 border-b border-gray-100">
+          <div class="step-num w-7 h-7 rounded-full text-xs font-extrabold flex items-center justify-center flex-shrink-0 mt-0.5">1</div>
+          <div><div class="text-sm font-semibold">브링그린 클렌징폼</div><div class="text-xs text-gray-400 mt-0.5">미지근한 물, 부드럽게 · 티트리·시카</div></div>
+        </div>
+        <div class="routine-step flex items-start gap-3 px-4 py-2.5 border-b border-gray-100">
+          <div class="step-num w-7 h-7 rounded-full text-xs font-extrabold flex items-center justify-center flex-shrink-0 mt-0.5">2</div>
+          <div><div class="text-sm font-semibold">PDRN 토너</div><div class="text-xs text-gray-400 mt-0.5">손바닥 패딩법 권장 · 폴리뉴클레오타이드</div></div>
+        </div>
+        <div class="routine-step flex items-start gap-3 px-4 py-2.5 border-b border-gray-100">
+          <div class="step-num w-7 h-7 rounded-full text-xs font-extrabold flex items-center justify-center flex-shrink-0 mt-0.5">3</div>
+          <div><div class="text-sm font-semibold">시카 토너 <span class="text-[#e91e63] text-[11px] font-bold ml-1">NEW</span></div><div class="text-xs text-gray-400 mt-0.5">중안부 홍조 부위 집중 · 센텔라</div></div>
+        </div>
+        <div class="routine-step flex items-start gap-3 px-4 py-2.5 border-b border-gray-100">
+          <div class="step-num w-7 h-7 rounded-full text-xs font-extrabold flex items-center justify-center flex-shrink-0 mt-0.5">4</div>
+          <div><div class="text-sm font-semibold">웰라주 히알루론산 앰플</div><div class="text-xs text-gray-400 mt-0.5">전 얼굴 도포 · 수분 공급</div></div>
+        </div>
+        <div class="routine-step flex items-start gap-3 px-4 py-2.5 border-b border-gray-100">
+          <div class="step-num w-7 h-7 rounded-full text-xs font-extrabold flex items-center justify-center flex-shrink-0 mt-0.5">5</div>
+          <div><div class="text-sm font-semibold">판테놀 앰플 <span class="text-[#e91e63] text-[11px] font-bold ml-1">NEW</span></div><div class="text-xs text-gray-400 mt-0.5">격일 사용 (주 3~4회) · 장벽 강화</div></div>
+        </div>
+        <div class="routine-step flex items-start gap-3 px-4 py-2.5 border-b border-gray-100">
+          <div class="step-num w-7 h-7 rounded-full text-xs font-extrabold flex items-center justify-center flex-shrink-0 mt-0.5">6</div>
+          <div><div class="text-sm font-semibold">온그리디언츠 로션</div><div class="text-xs text-gray-400 mt-0.5">전 얼굴 마무리 보습</div></div>
+        </div>
+        <div class="flex items-start gap-3 px-4 py-2.5 bg-amber-50">
+          <div class="w-7 h-7 rounded-full text-xs font-extrabold flex items-center justify-center flex-shrink-0 mt-0.5" style="background:#ffe082;color:#e65100;">7</div>
+          <div><div class="text-sm font-semibold text-orange-700">⚠ 선크림 SPF50+ PA+++</div><div class="text-xs text-orange-400 mt-0.5">미구비 시 홍조·여드름 악화 — 즉시 추가</div></div>
+        </div>
       </div>
-      <div class="routine-card pm">
-        <div class="r-header">🌙 PM 루틴 (매일 기본)</div>
-        <div class="routine-step"><div class="step-num pm">1</div><div class="step-info"><div class="step-product">브링그린 클렌징폼</div><div class="step-note">저녁 세안</div></div></div>
-        <div class="routine-step"><div class="step-num pm">2</div><div class="step-info"><div class="step-product">PDRN 토너</div><div class="step-note">1차 스킨</div></div></div>
-        <div class="routine-step"><div class="step-num pm">3</div><div class="step-info"><div class="step-product">시카 토너 <span class="step-new">NEW</span></div><div class="step-note">중안부 집중</div></div></div>
-        <div class="routine-step"><div class="step-num pm">4</div><div class="step-info"><div class="step-product">어성초 세럼 <span class="step-new">NEW</span></div><div class="step-note">하관·턱 집중 도포</div></div></div>
-        <div class="routine-step"><div class="step-num pm">5</div><div class="step-info"><div class="step-product">그린토마토 모공 앰플</div><div class="step-note">T존·나비존 집중</div></div></div>
-        <div class="routine-step"><div class="step-num pm">6</div><div class="step-info"><div class="step-product">아젤리아 스팟 <span class="step-cond">조건부</span></div><div class="step-note">홍조·여드름 부위 · 주 2~3회 (A·C일)</div></div></div>
-        <div class="routine-step"><div class="step-num pm">7</div><div class="step-info"><div class="step-product">온그리디언츠 로션</div><div class="step-note">마무리 보습</div></div></div>
-        <div class="routine-step"><div class="step-num pm">8</div><div class="step-info"><div class="step-product">파티마겔 스팟 <span class="step-cond">조건부</span></div><div class="step-note">화농성 여드름 자리만 · BHA날 금지</div></div></div>
+      <!-- PM -->
+      <div class="pm bg-white rounded-2xl overflow-hidden shadow-md">
+        <div class="px-5 py-3 font-extrabold text-white text-[15px]" style="background:linear-gradient(90deg,#5c6bc0,#3949ab);">🌙 PM 루틴 (매일 기본)</div>
+        <div class="routine-step flex items-start gap-3 px-4 py-2.5 border-b border-gray-100">
+          <div class="step-num w-7 h-7 rounded-full text-xs font-extrabold flex items-center justify-center flex-shrink-0 mt-0.5">1</div>
+          <div><div class="text-sm font-semibold">브링그린 클렌징폼</div><div class="text-xs text-gray-400 mt-0.5">저녁 세안</div></div>
+        </div>
+        <div class="routine-step flex items-start gap-3 px-4 py-2.5 border-b border-gray-100">
+          <div class="step-num w-7 h-7 rounded-full text-xs font-extrabold flex items-center justify-center flex-shrink-0 mt-0.5">2</div>
+          <div><div class="text-sm font-semibold">PDRN 토너</div><div class="text-xs text-gray-400 mt-0.5">1차 스킨</div></div>
+        </div>
+        <div class="routine-step flex items-start gap-3 px-4 py-2.5 border-b border-gray-100">
+          <div class="step-num w-7 h-7 rounded-full text-xs font-extrabold flex items-center justify-center flex-shrink-0 mt-0.5">3</div>
+          <div><div class="text-sm font-semibold">시카 토너 <span class="text-[#e91e63] text-[11px] font-bold ml-1">NEW</span></div><div class="text-xs text-gray-400 mt-0.5">중안부 집중</div></div>
+        </div>
+        <div class="routine-step flex items-start gap-3 px-4 py-2.5 border-b border-gray-100">
+          <div class="step-num w-7 h-7 rounded-full text-xs font-extrabold flex items-center justify-center flex-shrink-0 mt-0.5">4</div>
+          <div><div class="text-sm font-semibold">어성초 세럼 <span class="text-[#e91e63] text-[11px] font-bold ml-1">NEW</span></div><div class="text-xs text-gray-400 mt-0.5">하관·턱 집중 도포</div></div>
+        </div>
+        <div class="routine-step flex items-start gap-3 px-4 py-2.5 border-b border-gray-100">
+          <div class="step-num w-7 h-7 rounded-full text-xs font-extrabold flex items-center justify-center flex-shrink-0 mt-0.5">5</div>
+          <div><div class="text-sm font-semibold">그린토마토 모공 앰플</div><div class="text-xs text-gray-400 mt-0.5">T존·나비존 집중</div></div>
+        </div>
+        <div class="routine-step flex items-start gap-3 px-4 py-2.5 border-b border-gray-100">
+          <div class="step-num w-7 h-7 rounded-full text-xs font-extrabold flex items-center justify-center flex-shrink-0 mt-0.5">6</div>
+          <div><div class="text-sm font-semibold">아젤리아 스팟 <span class="text-[#9c27b0] text-[11px] font-bold ml-1">조건부</span></div><div class="text-xs text-gray-400 mt-0.5">홍조·여드름 부위 · 주 2~3회 (A·C일)</div></div>
+        </div>
+        <div class="routine-step flex items-start gap-3 px-4 py-2.5 border-b border-gray-100">
+          <div class="step-num w-7 h-7 rounded-full text-xs font-extrabold flex items-center justify-center flex-shrink-0 mt-0.5">7</div>
+          <div><div class="text-sm font-semibold">온그리디언츠 로션</div><div class="text-xs text-gray-400 mt-0.5">마무리 보습</div></div>
+        </div>
+        <div class="flex items-start gap-3 px-4 py-2.5">
+          <div class="step-num w-7 h-7 rounded-full text-xs font-extrabold flex items-center justify-center flex-shrink-0 mt-0.5">8</div>
+          <div><div class="text-sm font-semibold">파티마겔 스팟 <span class="text-[#9c27b0] text-[11px] font-bold ml-1">조건부</span></div><div class="text-xs text-gray-400 mt-0.5">화농성 여드름 자리만 · BHA날 금지</div></div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="section">
-    <div class="section-title">☀️ 선크림 비교 — 무기자차 추천</div>
-    <div class="table-wrap" style="margin-bottom:14px;">
-      <table class="conflict-table" style="min-width:420px;">
-        <thead><tr><th>구분</th><th>무기자차 (물리적 차단)</th><th>유기자차 (화학적 차단)</th></tr></thead>
+
+  <!-- 선크림 카드 (루틴 탭 안) -->
+  <div class="mb-10">
+    <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="sunscreen">
+      <div class="img-wrap aspect-square overflow-hidden bg-gray-50">
+        <a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000219554" target="_blank">
+          <img class="w-full h-full object-cover" src="images/gudal_sun.jpg" alt="구달 맑은 어성초 수분 선크림" loading="lazy">
+        </a>
+      </div>
+    </div>
+    <div class="p-3 bg-white rounded-b-2xl shadow-md -mt-4 pt-4">
+      <div class="text-xs text-gray-400 font-medium">구달</div>
+      <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">맑은 어성초 수분 선크림 50ml</div>
+      <div class="text-xs text-gray-500 mt-1">징크옥사이드 · 어성초 진정</div>
+      <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-amber-100 text-amber-700">무기자차 SPF50+/PA++++</span>
+      <div class="text-xs text-[#e8507a] font-bold mt-1">~12,000원 · 10ml ~2,400원</div>
+      <div class="text-xs text-gray-400">기획: 1+1 (합산 시 ml당 최저가)</div>
+    </div>
+
+    <div class="overflow-x-auto -mx-4 px-4 mt-4">
+      <table class="w-full border-collapse bg-white rounded-2xl overflow-hidden shadow-md" style="min-width:680px;">
+        <thead>
+          <tr class="bg-[#fce8e8] text-[#b85c5c]">
+            <th class="px-3 py-2.5 text-left text-xs font-bold whitespace-nowrap">제품명</th>
+            <th class="px-3 py-2.5 text-left text-xs font-bold whitespace-nowrap">용량</th>
+            <th class="px-3 py-2.5 text-left text-xs font-bold whitespace-nowrap">자차구분</th>
+            <th class="px-3 py-2.5 text-left text-xs font-bold whitespace-nowrap">주요 차단 성분</th>
+            <th class="px-3 py-2.5 text-left text-xs font-bold whitespace-nowrap">현재가격</th>
+            <th class="px-3 py-2.5 text-left text-xs font-bold whitespace-nowrap">10ml당</th>
+            <th class="px-3 py-2.5 text-left text-xs font-bold whitespace-nowrap">기획상품</th>
+          </tr>
+        </thead>
         <tbody>
-          <tr><td>차단 원리</td><td>자외선을 반사·산란</td><td>자외선 흡수 후 열로 변환</td></tr>
-          <tr><td>민감 피부</td><td><span class="ok">적합 (자극 낮음)</span></td><td>트러블 가능성</td></tr>
-          <tr><td>백탁</td><td>있음 (징크옥사이드)</td><td>없음</td></tr>
-          <tr><td>도포 시점</td><td>즉시 효과</td><td>도포 20~30분 후 효과</td></tr>
+          <tr class="border-b border-gray-100">
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap"><a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000149135" target="_blank" class="text-[#e8507a] underline">라운드랩 자작나무</a></td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">50ml</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="text-green-600 font-bold">무기자차</span></td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">티타늄디옥사이드, 징크옥사이드</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">~18,000원</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">~3,600원</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">+클렌저 20ml 약 25,900원</td>
+          </tr>
+          <tr class="border-b border-gray-100">
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap"><a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000181078" target="_blank" class="text-[#e8507a] underline">에스트라 더마UV365</a></td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">40ml</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="text-green-600 font-bold">무기자차</span></td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">티타늄디옥사이드, 징크옥사이드</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">~23,000원</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">~5,750원</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">40ml+20ml 듀오</td>
+          </tr>
+          <tr class="border-b border-gray-100">
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap"><a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000223423" target="_blank" class="text-[#e8507a] underline">메디힐 마데카소사이드</a></td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">50g</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="text-amber-600 font-bold">유기자차</span></td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">에칠헥실메톡시신나메이트 外</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">14,900원</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">2,980원</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">1+1 27,800원</td>
+          </tr>
+          <tr class="border-b border-gray-100">
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap"><a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000173774" target="_blank" class="text-[#e8507a] underline">토리든 다이브인</a></td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">60ml</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="text-green-600 font-bold">무기자차</span></td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">티타늄디옥사이드</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">~18,000원</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">~3,000원</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">+20ml 증정</td>
+          </tr>
+          <tr class="border-b border-gray-100">
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap"><a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000219554" target="_blank" class="text-[#e8507a] underline">구달 맑은 어성초</a></td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">50ml</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="text-green-600 font-bold">무기자차</span></td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">징크옥사이드</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">~12,000원</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">~2,400원</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">1+1 기획</td>
+          </tr>
+          <tr>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap"><a href="https://www.oliveyoung.co.kr/store/search/getSearchMain.do?query=%EC%9D%B4%EB%8B%88%EC%8A%A4%ED%94%84%EB%A6%AC+%ED%8A%B8%EB%A3%A8+%EB%A7%88%EC%9D%BC%EB%93%9C+%EC%8B%9C%EC%B9%B4+%EC%84%A0%ED%81%AC%EB%A6%BC" target="_blank" class="text-[#e8507a] underline">이니스프리 시카</a></td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">50ml</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="text-green-600 font-bold">무기자차</span></td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">징크옥사이드</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">~21,000원</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">~4,200원</td>
+            <td class="px-3 py-2.5 text-xs whitespace-nowrap">기획상품 변동</td>
+          </tr>
         </tbody>
       </table>
     </div>
-    <div class="warn-box" style="border-left-color:#2e7d32;background:#f1f8e9;margin-bottom:16px;">
-      수부지·홍조 피부 → <strong style="color:#2e7d32;">무기자차 우선 권장</strong>
-    </div>
-    <div class="products-grid" style="margin-bottom:16px;">
-      <div class="product-card">
-        <div class="img-wrap"><a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000149135" target="_blank"><img src="images/roundlab_sun.jpg" alt="라운드랩 자작나무 수분 선크림" loading="lazy"></a></div>
-        <div class="card-body"><div class="brand">라운드랩</div><div class="name">자작나무 수분 선크림 50ml</div><div class="key-ing">티타늄디옥사이드 + 징크옥사이드</div><div class="tag">무기자차 SPF50+/PA++++</div><div class="price">~18,000원 · 10ml ~3,600원</div><div class="key-ing">기획: +클렌저 20ml 약 25,900원</div></div>
-      </div>
-      <div class="product-card">
-        <div class="img-wrap"><a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000181078" target="_blank"><img src="images/aestura_sun.jpg" alt="에스트라 더마UV365 선크림" loading="lazy"></a></div>
-        <div class="card-body"><div class="brand">에스트라</div><div class="name">더마UV365 장벽수분 선크림 40ml</div><div class="key-ing">티타늄디옥사이드 + 징크옥사이드</div><div class="tag">무기자차 SPF50+/PA++++</div><div class="price">~23,000원 · 10ml ~5,750원</div><div class="key-ing">기획: 40ml+20ml 듀오</div></div>
-      </div>
-      <div class="product-card">
-        <div class="img-wrap"><a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000223423" target="_blank">          <img src="images/mediheal.jpg" alt="메디힐 마데카소사이드 선세럼" loading="lazy"></a></div>
-        </div>
-        <div class="card-body"><div class="brand">메디힐</div><div class="name">마데카소사이드 수분 선세럼 50g</div><div class="key-ing">에칠헥실메톡시신나메이트 外</div><div class="tag" style="color:#f57c00;background:#fff3e0;">유기자차 SPF50+/PA++++</div><div class="price">14,900원 · 10ml 2,980원</div><div class="key-ing">기획: 1+1 행사 27,800원</div></div>
-      </div>
-      <div class="product-card">
-        <div class="img-wrap"><a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000173774" target="_blank"><img src="images/torriden_sun.jpg" alt="토리든 다이브인 선크림" loading="lazy"></a></div>
-        <div class="card-body"><div class="brand">토리든</div><div class="name">다이브인 무기자차 선크림 60ml</div><div class="key-ing">티타늄디옥사이드</div><div class="tag">무기자차 SPF50+/PA++++</div><div class="price">~18,000원 · 10ml ~3,000원</div><div class="key-ing">기획: +20ml 증정</div></div>
-      </div>
-      <div class="product-card">
-        <div class="img-wrap"><a href="https://www.oliveyoung.co.kr/store/search/getSearchMain.do?query=%EC%9D%B4%EB%8B%88%EC%8A%A4%ED%94%84%EB%A6%AC+%ED%8A%B8%EB%A3%A8+%EB%A7%88%EC%9D%BC%EB%93%9C+%EC%8B%9C%EC%B9%B4+%EC%84%A0%ED%81%AC%EB%A6%BC" target="_blank">          <img src="images/innisfree.jpg" alt="이니스프리 트루 마일드 시카 선크림" loading="lazy"></a></div>
-        </div>
-        <div class="card-body"><div class="brand">이니스프리</div><div class="name">트루 마일드 시카 선크림 50ml</div><div class="key-ing">징크옥사이드 (시카 5종 진정)</div><div class="tag">무기자차 SPF50+/PA++++</div><div class="price">~21,000원 · 10ml ~4,200원</div><div class="key-ing">기획: 기획상품 변동</div></div>
-      </div>
-      <div class="product-card">
-        <div class="img-wrap"><a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000219554" target="_blank">          <img src="images/gudal_sun.jpg" alt="구달 맑은 어성초 수분 선크림" loading="lazy"></a></div>
-        </div>
-        <div class="card-body"><div class="brand">구달</div><div class="name">맑은 어성초 수분 선크림 50ml</div><div class="key-ing">징크옥사이드 · 어성초 진정</div><div class="tag">무기자차 SPF50+/PA++++</div><div class="price">~12,000원 · 10ml ~2,400원</div><div class="key-ing">기획: 1+1 (합산 시 ml당 최저가)</div></div>
-      </div>
-    </div>
-    <div class="table-wrap" style="margin-bottom:16px;">
-      <table class="conflict-table" style="min-width:680px;">
-        <thead><tr><th>제품명</th><th>용량</th><th>자차구분</th><th>주요 차단 성분</th><th>현재가격</th><th>10ml당</th><th>기획상품</th></tr></thead>
-        <tbody>
-          <tr><td><a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000149135" target="_blank">라운드랩 자작나무</a></td><td>50ml</td><td><span class="ok">무기자차</span></td><td>티타늄디옥사이드, 징크옥사이드</td><td>~18,000원</td><td>~3,600원</td><td>+클렌저 20ml 약 25,900원</td></tr>
-          <tr><td><a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000181078" target="_blank">에스트라 더마UV365</a></td><td>40ml</td><td><span class="ok">무기자차</span></td><td>티타늄디옥사이드, 징크옥사이드</td><td>~23,000원</td><td>~5,750원</td><td>40ml+20ml 듀오</td></tr>
-          <tr><td><a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000223423" target="_blank">메디힐 마데카소사이드</a></td><td>50g</td><td><span class="warn">유기자차</span></td><td>에칠헥실메톡시신나메이트 外</td><td>14,900원</td><td>2,980원</td><td>1+1 27,800원</td></tr>
-          <tr><td><a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000173774" target="_blank">토리든 다이브인</a></td><td>60ml</td><td><span class="ok">무기자차</span></td><td>티타늄디옥사이드</td><td>~18,000원</td><td>~3,000원</td><td>+20ml 증정</td></tr>
-          <tr><td><a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000219554" target="_blank">구달 맑은 어성초</a></td><td>50ml</td><td><span class="ok">무기자차</span></td><td>징크옥사이드</td><td>~12,000원</td><td>~2,400원</td><td>1+1 기획</td></tr>
-          <tr><td><a href="https://www.oliveyoung.co.kr/store/search/getSearchMain.do?query=%EC%9D%B4%EB%8B%88%EC%8A%A4%ED%94%84%EB%A6%AC+%ED%8A%B8%EB%A3%A8+%EB%A7%88%EC%9D%BC%EB%93%9C+%EC%8B%9C%EC%B9%B4+%EC%84%A0%ED%81%AC%EB%A6%BC" target="_blank">이니스프리 시카</a></td><td>50ml</td><td><span class="ok">무기자차</span></td><td>징크옥사이드</td><td>~21,000원</td><td>~4,200원</td><td>기획상품 변동</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <ul class="priority-list">
-      <li><div class="pri-num">1</div><div class="pri-text"><div class="pri-title">토리든 다이브인 무기자차 선크림</div><div class="pri-reason">단일 무기자차(TiO₂), 히알루론산 18종, 60ml 최다 용량 — 수부지 가성비 최고</div></div></li>
-      <li><div class="pri-num">2</div><div class="pri-text"><div class="pri-title">라운드랩 자작나무 수분 선크림</div><div class="pri-reason">자작나무수+비피다 발효 보습, 수분 유지력 우수 — 수부지 최적화</div></div></li>
-      <li><div class="pri-num">3</div><div class="pri-text"><div class="pri-title">이니스프리 트루 마일드 시카 선크림</div><div class="pri-reason">시카 5종 복합 진정, 민감·홍조 피부 특화 (ZnO 단일 필터)</div></div></li>
-      <li><div class="pri-num">4</div><div class="pri-text"><div class="pri-title">구달 맑은 어성초 수분 선크림</div><div class="pri-reason">징크옥사이드 단일 무기자차, 어성초 진정 · 50ml 최저가 — 가성비 우선 선택</div></div></li>
+
+    <ul class="list-none mt-4 space-y-2">
+      <li class="bg-white rounded-xl px-4 py-3 shadow-md flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full flex-shrink-0 flex items-center justify-center text-white font-extrabold text-sm" style="background:linear-gradient(135deg,#e8507a,#f4a0b8);">1</div>
+        <div><div class="font-bold text-sm">토리든 다이브인 무기자차 선크림</div><div class="text-xs text-gray-500 mt-0.5">단일 무기자차(TiO₂), 히알루론산 18종, 60ml 최다 용량 — 수부지 가성비 최고</div></div>
+      </li>
+      <li class="bg-white rounded-xl px-4 py-3 shadow-md flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full flex-shrink-0 flex items-center justify-center text-white font-extrabold text-sm" style="background:linear-gradient(135deg,#e8507a,#f4a0b8);">2</div>
+        <div><div class="font-bold text-sm">라운드랩 자작나무 수분 선크림</div><div class="text-xs text-gray-500 mt-0.5">자작나무수+비피다 발효 보습, 수분 유지력 우수 — 수부지 최적화</div></div>
+      </li>
+      <li class="bg-white rounded-xl px-4 py-3 shadow-md flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full flex-shrink-0 flex items-center justify-center text-white font-extrabold text-sm" style="background:linear-gradient(135deg,#e8507a,#f4a0b8);">3</div>
+        <div><div class="font-bold text-sm">이니스프리 트루 마일드 시카 선크림</div><div class="text-xs text-gray-500 mt-0.5">시카 5종 복합 진정, 민감·홍조 피부 특화 (ZnO 단일 필터)</div></div>
+      </li>
+      <li class="bg-white rounded-xl px-4 py-3 shadow-md flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full flex-shrink-0 flex items-center justify-center text-white font-extrabold text-sm" style="background:linear-gradient(135deg,#e8507a,#f4a0b8);">4</div>
+        <div><div class="font-bold text-sm">구달 맑은 어성초 수분 선크림</div><div class="text-xs text-gray-500 mt-0.5">징크옥사이드 단일 무기자차, 어성초 진정 · 50ml 최저가 — 가성비 우선 선택</div></div>
+      </li>
     </ul>
   </div>
 </div>
 
 <!-- TAB3: 제품쇼핑 -->
 <div class="tab-pane" id="products">
-  <div class="section">
-    <div class="section-title">현재 보유 제품 + 추천 제품</div>
-    <div class="filter-wrap">
-      <button class="filter-btn active" data-cat="all">전체</button>
-      <button class="filter-btn" data-cat="owned">보유</button>
-      <button class="filter-btn" data-cat="cica">시카</button>
-      <button class="filter-btn" data-cat="houttuynia">어성초</button>
-      <button class="filter-btn" data-cat="panthenol">판테놀</button>
-      <button class="filter-btn" data-cat="bha">BHA</button>
-      <button class="filter-btn" data-cat="sunscreen">선크림</button>
-      <button class="filter-btn" data-cat="rx">일반의약품</button>
+  <div class="mb-10 pt-6">
+    <h2 class="text-lg font-extrabold text-[#e8507a] border-l-4 border-[#e8507a] pl-3 mb-4">현재 보유 제품 + 추천 제품</h2>
+    <!-- 필터 버튼 -->
+    <div class="flex flex-wrap gap-2 mb-5">
+      <button class="filter-btn flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold cursor-pointer border-2 border-[#e8507a] transition-colors duration-200" data-cat="all" style="background:#e8507a;color:white;">전체</button>
+      <button class="filter-btn flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold cursor-pointer border-2 border-[#e8507a] bg-white text-[#e8507a] transition-colors duration-200" data-cat="owned">보유</button>
+      <button class="filter-btn flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold cursor-pointer border-2 border-[#e8507a] bg-white text-[#e8507a] transition-colors duration-200" data-cat="cica">시카</button>
+      <button class="filter-btn flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold cursor-pointer border-2 border-[#e8507a] bg-white text-[#e8507a] transition-colors duration-200" data-cat="houttuynia">어성초</button>
+      <button class="filter-btn flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold cursor-pointer border-2 border-[#e8507a] bg-white text-[#e8507a] transition-colors duration-200" data-cat="panthenol">판테놀</button>
+      <button class="filter-btn flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold cursor-pointer border-2 border-[#e8507a] bg-white text-[#e8507a] transition-colors duration-200" data-cat="bha">BHA</button>
+      <button class="filter-btn flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold cursor-pointer border-2 border-[#e8507a] bg-white text-[#e8507a] transition-colors duration-200" data-cat="sunscreen">선크림</button>
+      <button class="filter-btn flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold cursor-pointer border-2 border-[#e8507a] bg-white text-[#e8507a] transition-colors duration-200" data-cat="rx">일반의약품</button>
     </div>
 
-    <div class="sub-header">📦 현재 보유 제품</div>
-    <div class="products-grid">
-      <div class="product-card" data-cat="owned">
-        <div class="img-wrap"><img src="images/bringgreen_foam.jpg" alt="브링그린 클렌징폼" loading="lazy"></div>
-        <div class="card-body"><div class="brand">브링그린</div><div class="name">티트리 시카 딥클렌징폼</div><div class="key-ing">티트리 · 시카</div><span class="tag tag-owned">✓ 보유</span></div>
-      </div>
-      <div class="product-card" data-cat="owned">
-        <div class="img-wrap">          <img src="images/pdrn.jpg" alt="PDRN 토너" loading="lazy">
+    <!-- 보유 -->
+    <div class="sub-header text-sm font-bold text-[#7a3a3a] bg-[#fce8e8] rounded-xl px-3 py-2 mb-3 flex items-center gap-2" data-cat="owned">📦 현재 보유 제품</div>
+    <div class="products-grid grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="owned">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/bringgreen_foam.jpg" alt="브링그린 클렌징폼" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">브링그린</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">티트리 시카 딥클렌징폼</div>
+          <div class="text-xs text-gray-500 mt-1">티트리 · 시카</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-pink-100 text-[#e8507a]">✓ 보유</span>
         </div>
-        <div class="card-body"><div class="brand">다이소 구매</div><div class="name">PDRN 토너 (1차 스킨)</div><div class="key-ing">폴리뉴클레오타이드 · 재생</div><span class="tag tag-nodaiso">다이소</span><span class="tag tag-owned">✓ 보유</span></div>
       </div>
-      <div class="product-card" data-cat="owned">
-        <div class="img-wrap">          <img src="images/wellage.jpg" alt="웰라주 히알루론산 앰플" loading="lazy">
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="owned">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/pdrn.jpg" alt="PDRN 토너" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">다이소 구매</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">PDRN 토너 (1차 스킨)</div>
+          <div class="text-xs text-gray-500 mt-1">폴리뉴클레오타이드 · 재생</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-blue-100 text-blue-700 mr-1">다이소</span>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-pink-100 text-[#e8507a]">✓ 보유</span>
         </div>
-        <div class="card-body"><div class="brand">웰라주</div><div class="name">히알루론산 앰플</div><div class="key-ing">히알루론산 · 수분 공급</div><span class="tag tag-owned">✓ 보유</span></div>
       </div>
-      <div class="product-card" data-cat="owned">
-        <div class="img-wrap"><img src="images/dermafactory_niacinamide.jpg" alt="더마팩토리 나이아신아마이드 20%" loading="lazy"></div>
-        <div class="card-body"><div class="brand">더마팩토리</div><div class="name">나이아신아마이드 20% 세럼</div><div class="key-ing">나이아신아마이드 20%</div><span class="tag tag-owned">✓ 보유</span><div style="font-size:0.68rem;color:#f57c00;margin-top:4px;">⚠ 격일(주3회) PM만</div></div>
-      </div>
-      <div class="product-card" data-cat="owned">
-        <div class="img-wrap"><img src="images/greentomato_pore.jpg" alt="그린토마토 모공 앰플" loading="lazy"></div>
-        <div class="card-body"><div class="brand">성분에디터</div><div class="name">그린토마토 NMN 포어 앰플</div><div class="key-ing">토마토 추출물 · AHA</div><span class="tag tag-owned">✓ 보유</span></div>
-      </div>
-      <div class="product-card" data-cat="owned">
-        <div class="img-wrap">          <img src="images/ongrediants.jpg" alt="온그리디언츠 로션" loading="lazy">
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="owned">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/wellage.jpg" alt="웰라주 히알루론산 앰플" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">웰라주</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">히알루론산 앰플</div>
+          <div class="text-xs text-gray-500 mt-1">히알루론산 · 수분 공급</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-pink-100 text-[#e8507a]">✓ 보유</span>
         </div>
-        <div class="card-body"><div class="brand">온그리디언츠</div><div class="name">로션 (마무리 보습)</div><div class="key-ing">보습 · 마무리 레이어</div><span class="tag tag-owned">✓ 보유</span></div>
       </div>
-    </div>
-
-    <div class="sub-header">🌿 시카 (Cica) — 홍조 진정·장벽 강화</div>
-    <div class="products-grid">
-      <div class="product-card" data-cat="cica">
-        <div class="img-wrap"><img src="images/bringgreen_toner.jpg" alt="브링그린 티트리 시카 수딩 토너" loading="lazy"></div>
-        <div class="card-body"><div class="brand">브링그린</div><div class="name">티트리 시카 수딩 토너 500ml</div><div class="key-ing">티트리 · 시카</div><div class="price"><span class="original">15,000원</span>13,500원</div><span class="tag tag-rec">추천</span><span class="tag tag-pick">★ 가성비픽</span></div>
-      </div>
-      <div class="product-card" data-cat="cica">
-        <div class="img-wrap"><img src="images/aestura_toner.jpg" alt="에스트라 에이시카365 수분토너" loading="lazy"></div>
-        <div class="card-body"><div class="brand">에스트라</div><div class="name">에이시카365 수분토너 pH4.5 200ml</div><div class="key-ing">센텔라 · pH4.5 약산성</div><div class="price"><span class="original">28,000원</span>23,800원</div><span class="tag tag-rec">추천</span></div>
-      </div>
-      <div class="product-card" data-cat="cica">
-        <div class="img-wrap"><img src="images/roundlab_toner.jpg" alt="라운드랩 소나무 진정 시카 토너" loading="lazy"></div>
-        <div class="card-body"><div class="brand">라운드랩</div><div class="name">소나무 진정 시카 토너 250ml</div><div class="key-ing">소나무수 · 시카</div><div class="price"><span class="original">23,000원</span>19,900원</div><span class="tag tag-rec">추천</span></div>
-      </div>
-      <div class="product-card" data-cat="cica">
-        <div class="img-wrap"><img src="images/physiogel_toner.jpg" alt="피지오겔 레드수딩 시카밸런스 토너" loading="lazy"></div>
-        <div class="card-body"><div class="brand">피지오겔</div><div class="name">레드수딩 시카밸런스 토너 200ml</div><div class="key-ing">시카 · 홍조 전문 레드수딩</div><div class="price"><span class="original">28,000원</span>22,400원</div><span class="tag tag-rec">추천</span><span class="tag tag-pick">★ 홍조픽</span></div>
-      </div>
-    </div>
-    <div class="warn-box">→ 예산 적으면 <strong>브링그린 티트리 시카 토너</strong>, 홍조 심하면 <strong>피지오겔 레드수딩</strong></div>
-
-    <div class="sub-header">🌱 어성초 (Houttuynia) — 화농성 여드름 항균</div>
-    <div class="products-grid">
-      <div class="product-card" data-cat="houttuynia">
-        <div class="img-wrap"><img src="images/anua_serum.png" alt="아누아 어성초 77 세럼" loading="lazy"></div>
-        <div class="card-body"><div class="brand">아누아</div><div class="name">어성초77 B3징크 트러블 세럼 더블기획</div><div class="key-ing">어성초77% · 나이아신아마이드 · 징크</div><div class="price"><span class="original">48,000원</span>27,000원</div><span class="tag tag-rec">추천</span><span class="tag tag-pick">★ 6월한정픽</span></div>
-      </div>
-      <div class="product-card" data-cat="houttuynia">
-        <div class="img-wrap"><img src="images/abib_serum.png" alt="아비브 어성초 테카 캡슐 세럼" loading="lazy"></div>
-        <div class="card-body"><div class="brand">아비브</div><div class="name">어성초 테카 캡슐 세럼 더블기획 50ml</div><div class="key-ing">어성초 · 시카 · 테카</div><div class="price"><span class="original">48,000원</span>29,800원</div><span class="tag tag-rec">추천</span><span class="tag tag-pick">★ 상시픽</span></div>
-      </div>
-      <div class="product-card" data-cat="houttuynia">
-        <div class="img-wrap"><img src="images/goodal_serum.jpg" alt="구달 어성초 징크 세럼" loading="lazy"></div>
-        <div class="card-body"><div class="brand">구달</div><div class="name">어성초 징크 히알루론 레드 수딩 세럼 30ml</div><div class="key-ing">어성초 · 징크 · 히알루론산</div><div class="price"><span class="original">22,000원</span>18,900원</div><span class="tag tag-rec">추천</span><span class="tag tag-pick">★ 입문픽</span></div>
-      </div>
-    </div>
-    <div class="warn-box">→ 6월 한정: <strong>아누아 더블기획</strong> / 상시 구매: <strong>아비브 더블기획</strong></div>
-
-    <div class="sub-header">💊 판테놀 (비타민B5) — 피부 장벽 강화</div>
-    <div class="products-grid">
-      <div class="product-card" data-cat="panthenol">
-        <div class="img-wrap"><img src="images/dermatory_ampoule.jpg" alt="더마토리 히알샷 배리어 앰플 비5" loading="lazy"></div>
-        <div class="card-body"><div class="brand">더마토리</div><div class="name">히알샷 배리어 앰플 비5 100ml 기획</div><div class="key-ing">판테놀B5 고함량 · 히알루론산</div><div class="price"><span class="original">38,000원</span>26,600원</div><span class="tag tag-rec">추천</span><span class="tag tag-pick">★ 장벽픽</span></div>
-      </div>
-      <div class="product-card" data-cat="panthenol">
-        <div class="img-wrap"><img src="images/pation_serum.jpg" alt="파티온 노스카나인 트러블 세럼" loading="lazy"></div>
-        <div class="card-body"><div class="brand">파티온</div><div class="name">노스카나인 트러블 세럼 리필기획 50ml</div><div class="key-ing">판테놀 · 나이아신아마이드</div><div class="price"><span class="original">54,000원</span>32,300원</div><span class="tag tag-rec">추천</span><span class="tag tag-pick">★ 6월한정픽</span></div>
-      </div>
-    </div>
-    <div class="warn-box">→ 장벽 강화 우선: <strong>더마토리 히알샷 비5</strong> / 여드름+장벽 동시: <strong>파티온 노스카나인</strong></div>
-
-    <div class="sub-header">🧴 BHA + 시카 패드 — 모공·각질 집중</div>
-    <div class="products-grid">
-      <div class="product-card" data-cat="bha">
-        <div class="img-wrap"><img src="images/celimax_pad.png" alt="셀리맥스 시카바하 블레미쉬 패드" loading="lazy"></div>
-        <div class="card-body"><div class="brand">셀리맥스</div><div class="name">지우개 시카 바하 블레미쉬 패드 기획 120매</div><div class="key-ing">시카 · BHA(살리실산)</div><div class="price"><span class="original">29,500원</span>26,500원</div><span class="tag tag-rec">추천</span><span class="tag tag-pick">★ 이중효과픽</span></div>
-      </div>
-      <div class="product-card" data-cat="bha">
-        <div class="img-wrap"><img src="images/cosrx_pad.jpg" alt="코스알엑스 원스텝 패드" loading="lazy"></div>
-        <div class="card-body"><div class="brand">코스알엑스</div><div class="name">원스텝 오리지널 패드 100매</div><div class="key-ing">살리실산 0.5% BHA</div><div class="price"><span class="original">24,000원</span>19,900원</div><span class="tag tag-rec">추천</span></div>
-      </div>
-    </div>
-    <div class="warn-box">→ <strong>셀리맥스 시카+바하 패드</strong> 추천 (시카+BHA 이중 효과로 비용 절약)</div>
-
-    <div class="sub-header">☀️ 선크림 — 무기자차 추천</div>
-    <div class="products-grid">
-      <div class="product-card" data-cat="sunscreen">
-        <div class="img-wrap"><a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000149135" target="_blank"><img src="images/roundlab_sun.jpg" alt="라운드랩 자작나무 수분 선크림" loading="lazy"></a></div>
-        <div class="card-body"><div class="brand">라운드랩</div><div class="name">자작나무 수분 선크림 50ml</div><div class="key-ing">TiO₂ + ZnO 무기자차</div><div class="price">~18,000원</div><span class="tag tag-rec">추천</span></div>
-      </div>
-      <div class="product-card" data-cat="sunscreen">
-        <div class="img-wrap"><a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000173774" target="_blank"><img src="images/torriden_sun.jpg" alt="토리든 다이브인 선크림" loading="lazy"></a></div>
-        <div class="card-body"><div class="brand">토리든</div><div class="name">다이브인 무기자차 선크림 60ml</div><div class="key-ing">TiO₂ 단일 무기자차</div><div class="price">~18,000원</div><span class="tag tag-rec">추천</span><span class="tag tag-pick">★ 가성비픽</span></div>
-      </div>
-    </div>
-
-    <div class="sub-header">💊 일반의약품 (약국 구매)</div>
-    <div class="products-grid">
-      <div class="product-card" data-cat="rx">
-        <div class="img-wrap" style="background:#fff0f3;">          <img src="images/fatima.png" alt="파티마겔" loading="lazy">
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="owned">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/dermafactory_niacinamide.jpg" alt="더마팩토리 나이아신아마이드 20%" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">더마팩토리</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">나이아신아마이드 20% 세럼</div>
+          <div class="text-xs text-gray-500 mt-1">나이아신아마이드 20%</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-pink-100 text-[#e8507a]">✓ 보유</span>
+          <div class="text-[11px] text-amber-600 mt-1">⚠ 격일(주3회) PM만</div>
         </div>
-        <div class="card-body"><div class="brand" style="color:#c62828;">약국 전용</div><div class="name">파티마겔 (과산화벤조일)</div><div class="key-ing">Benzoyl Peroxide · 살균</div><span class="tag tag-rx">의약품</span><div style="font-size:11px;color:#666;margin-top:6px;line-height:1.4;">사용법: 크림 단계 후 스팟<br>주 2~3회 · BHA 날 사용금지<br>⚠ 옷·베개 탈색 주의</div></div>
       </div>
-      <div class="product-card" data-cat="rx">
-        <div class="img-wrap" style="background:#f3e5f5;">          <img src="images/azalea.png" alt="아젤리아 크림" loading="lazy">
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="owned">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/greentomato_pore.jpg" alt="그린토마토 모공 앰플" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">성분에디터</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">그린토마토 NMN 포어 앰플</div>
+          <div class="text-xs text-gray-500 mt-1">토마토 추출물 · AHA</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-pink-100 text-[#e8507a]">✓ 보유</span>
         </div>
-        <div class="card-body"><div class="brand" style="color:#7b1fa2;">약국 전용</div><div class="name">아젤리아 (아젤라산)</div><div class="key-ing">Azelaic Acid · 항균·항염·홍조</div><span class="tag tag-rx">의약품</span><div style="font-size:11px;color:#666;margin-top:6px;line-height:1.4;">사용법: 로션 전 홍조·여드름 부위<br>주 2~3회 (A일·C일) · BHA 날 금지<br>홍조+화농성 동시 케어</div></div>
+      </div>
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="owned">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/ongrediants.jpg" alt="온그리디언츠 로션" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">온그리디언츠</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">로션 (마무리 보습)</div>
+          <div class="text-xs text-gray-500 mt-1">보습 · 마무리 레이어</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-pink-100 text-[#e8507a]">✓ 보유</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 시카 -->
+    <div class="sub-header text-sm font-bold text-[#7a3a3a] bg-[#fce8e8] rounded-xl px-3 py-2 mb-3 flex items-center gap-2" data-cat="cica">🌿 시카 (Cica) — 홍조 진정·장벽 강화</div>
+    <div class="products-grid grid grid-cols-2 sm:grid-cols-3 gap-3 mb-2">
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="cica">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/bringgreen_toner.jpg" alt="브링그린 티트리 시카 수딩 토너" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">브링그린</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">티트리 시카 수딩 토너 500ml</div>
+          <div class="text-xs text-gray-500 mt-1">티트리 · 시카</div>
+          <div class="text-sm font-bold text-[#e8507a] mt-1"><span class="line-through text-gray-400 font-normal text-xs mr-1">15,000원</span>13,500원</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-amber-100 text-amber-700 mr-1">추천</span>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-purple-100 text-purple-700">★ 가성비픽</span>
+        </div>
+      </div>
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="cica">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/aestura_toner.jpg" alt="에스트라 에이시카365 수분토너" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">에스트라</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">에이시카365 수분토너 pH4.5 200ml</div>
+          <div class="text-xs text-gray-500 mt-1">센텔라 · pH4.5 약산성</div>
+          <div class="text-sm font-bold text-[#e8507a] mt-1"><span class="line-through text-gray-400 font-normal text-xs mr-1">28,000원</span>23,800원</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-amber-100 text-amber-700">추천</span>
+        </div>
+      </div>
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="cica">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/roundlab_toner.jpg" alt="라운드랩 소나무 진정 시카 토너" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">라운드랩</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">소나무 진정 시카 토너 250ml</div>
+          <div class="text-xs text-gray-500 mt-1">소나무수 · 시카</div>
+          <div class="text-sm font-bold text-[#e8507a] mt-1"><span class="line-through text-gray-400 font-normal text-xs mr-1">23,000원</span>19,900원</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-amber-100 text-amber-700">추천</span>
+        </div>
+      </div>
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="cica">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/physiogel_toner.jpg" alt="피지오겔 레드수딩 시카밸런스 토너" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">피지오겔</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">레드수딩 시카밸런스 토너 200ml</div>
+          <div class="text-xs text-gray-500 mt-1">시카 · 홍조 전문 레드수딩</div>
+          <div class="text-sm font-bold text-[#e8507a] mt-1"><span class="line-through text-gray-400 font-normal text-xs mr-1">28,000원</span>22,400원</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-amber-100 text-amber-700 mr-1">추천</span>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-purple-100 text-purple-700">★ 홍조픽</span>
+        </div>
+      </div>
+    </div>
+    <div class="bg-amber-50 border-l-4 border-amber-400 rounded-r-xl px-4 py-3 mb-5 text-sm text-amber-900">→ 예산 적으면 <strong>브링그린 티트리 시카 토너</strong>, 홍조 심하면 <strong>피지오겔 레드수딩</strong></div>
+
+    <!-- 어성초 -->
+    <div class="sub-header text-sm font-bold text-[#7a3a3a] bg-[#fce8e8] rounded-xl px-3 py-2 mb-3 flex items-center gap-2" data-cat="houttuynia">🌱 어성초 (Houttuynia) — 화농성 여드름 항균</div>
+    <div class="products-grid grid grid-cols-2 sm:grid-cols-3 gap-3 mb-2">
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="houttuynia">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/anua_serum.png" alt="아누아 어성초 77 세럼" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">아누아</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">어성초77 B3징크 트러블 세럼 더블기획</div>
+          <div class="text-xs text-gray-500 mt-1">어성초77% · 나이아신아마이드 · 징크</div>
+          <div class="text-sm font-bold text-[#e8507a] mt-1"><span class="line-through text-gray-400 font-normal text-xs mr-1">48,000원</span>27,000원</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-amber-100 text-amber-700 mr-1">추천</span>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-purple-100 text-purple-700">★ 6월한정픽</span>
+        </div>
+      </div>
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="houttuynia">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/abib_serum.png" alt="아비브 어성초 테카 캡슐 세럼" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">아비브</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">어성초 테카 캡슐 세럼 더블기획 50ml</div>
+          <div class="text-xs text-gray-500 mt-1">어성초 · 시카 · 테카</div>
+          <div class="text-sm font-bold text-[#e8507a] mt-1"><span class="line-through text-gray-400 font-normal text-xs mr-1">48,000원</span>29,800원</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-amber-100 text-amber-700 mr-1">추천</span>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-purple-100 text-purple-700">★ 상시픽</span>
+        </div>
+      </div>
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="houttuynia">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/goodal_serum.jpg" alt="구달 어성초 징크 세럼" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">구달</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">어성초 징크 히알루론 레드 수딩 세럼 30ml</div>
+          <div class="text-xs text-gray-500 mt-1">어성초 · 징크 · 히알루론산</div>
+          <div class="text-sm font-bold text-[#e8507a] mt-1"><span class="line-through text-gray-400 font-normal text-xs mr-1">22,000원</span>18,900원</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-amber-100 text-amber-700 mr-1">추천</span>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-purple-100 text-purple-700">★ 입문픽</span>
+        </div>
+      </div>
+    </div>
+    <div class="bg-amber-50 border-l-4 border-amber-400 rounded-r-xl px-4 py-3 mb-5 text-sm text-amber-900">→ 6월 한정: <strong>아누아 더블기획</strong> / 상시 구매: <strong>아비브 더블기획</strong></div>
+
+    <!-- 판테놀 -->
+    <div class="sub-header text-sm font-bold text-[#7a3a3a] bg-[#fce8e8] rounded-xl px-3 py-2 mb-3 flex items-center gap-2" data-cat="panthenol">💊 판테놀 (비타민B5) — 피부 장벽 강화</div>
+    <div class="products-grid grid grid-cols-2 sm:grid-cols-3 gap-3 mb-2">
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="panthenol">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/dermatory_ampoule.jpg" alt="더마토리 히알샷 배리어 앰플 비5" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">더마토리</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">히알샷 배리어 앰플 비5 100ml 기획</div>
+          <div class="text-xs text-gray-500 mt-1">판테놀B5 고함량 · 히알루론산</div>
+          <div class="text-sm font-bold text-[#e8507a] mt-1"><span class="line-through text-gray-400 font-normal text-xs mr-1">38,000원</span>26,600원</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-amber-100 text-amber-700 mr-1">추천</span>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-purple-100 text-purple-700">★ 장벽픽</span>
+        </div>
+      </div>
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="panthenol">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/pation_serum.jpg" alt="파티온 노스카나인 트러블 세럼" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">파티온</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">노스카나인 트러블 세럼 리필기획 50ml</div>
+          <div class="text-xs text-gray-500 mt-1">판테놀 · 나이아신아마이드</div>
+          <div class="text-sm font-bold text-[#e8507a] mt-1"><span class="line-through text-gray-400 font-normal text-xs mr-1">54,000원</span>32,300원</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-amber-100 text-amber-700 mr-1">추천</span>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-purple-100 text-purple-700">★ 6월한정픽</span>
+        </div>
+      </div>
+    </div>
+    <div class="bg-amber-50 border-l-4 border-amber-400 rounded-r-xl px-4 py-3 mb-5 text-sm text-amber-900">→ 장벽 강화 우선: <strong>더마토리 히알샷 비5</strong> / 여드름+장벽 동시: <strong>파티온 노스카나인</strong></div>
+
+    <!-- BHA -->
+    <div class="sub-header text-sm font-bold text-[#7a3a3a] bg-[#fce8e8] rounded-xl px-3 py-2 mb-3 flex items-center gap-2" data-cat="bha">🧴 BHA + 시카 패드 — 모공·각질 집중</div>
+    <div class="products-grid grid grid-cols-2 sm:grid-cols-3 gap-3 mb-2">
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="bha">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/celimax_pad.png" alt="셀리맥스 시카바하 블레미쉬 패드" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">셀리맥스</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">지우개 시카 바하 블레미쉬 패드 기획 120매</div>
+          <div class="text-xs text-gray-500 mt-1">시카 · BHA(살리실산)</div>
+          <div class="text-sm font-bold text-[#e8507a] mt-1"><span class="line-through text-gray-400 font-normal text-xs mr-1">29,500원</span>26,500원</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-amber-100 text-amber-700 mr-1">추천</span>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-purple-100 text-purple-700">★ 이중효과픽</span>
+        </div>
+      </div>
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="bha">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-cover" src="images/cosrx_pad.jpg" alt="코스알엑스 원스텝 패드" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">코스알엑스</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">원스텝 오리지널 패드 100매</div>
+          <div class="text-xs text-gray-500 mt-1">살리실산 0.5% BHA</div>
+          <div class="text-sm font-bold text-[#e8507a] mt-1"><span class="line-through text-gray-400 font-normal text-xs mr-1">24,000원</span>19,900원</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-amber-100 text-amber-700">추천</span>
+        </div>
+      </div>
+    </div>
+    <div class="bg-amber-50 border-l-4 border-amber-400 rounded-r-xl px-4 py-3 mb-5 text-sm text-amber-900">→ <strong>셀리맥스 시카+바하 패드</strong> 추천 (시카+BHA 이중 효과로 비용 절약)</div>
+
+    <!-- 선크림 -->
+    <div class="sub-header text-sm font-bold text-[#7a3a3a] bg-[#fce8e8] rounded-xl px-3 py-2 mb-3 flex items-center gap-2" data-cat="sunscreen">☀️ 선크림 — 무기자차 추천</div>
+    <div class="products-grid grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="sunscreen">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50">
+          <a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000149135" target="_blank">
+            <img class="w-full h-full object-cover" src="images/roundlab_sun.jpg" alt="라운드랩 자작나무 수분 선크림" loading="lazy">
+          </a>
+        </div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">라운드랩</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">자작나무 수분 선크림 50ml</div>
+          <div class="text-xs text-gray-500 mt-1">TiO₂ + ZnO 무기자차</div>
+          <div class="text-sm font-bold text-[#e8507a] mt-1">~18,000원</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-amber-100 text-amber-700">추천</span>
+        </div>
+      </div>
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="sunscreen">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50">
+          <a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000173774" target="_blank">
+            <img class="w-full h-full object-cover" src="images/torriden_sun.jpg" alt="토리든 다이브인 선크림" loading="lazy">
+          </a>
+        </div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">토리든</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">다이브인 무기자차 선크림 60ml</div>
+          <div class="text-xs text-gray-500 mt-1">TiO₂ 단일 무기자차</div>
+          <div class="text-sm font-bold text-[#e8507a] mt-1">~18,000원</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-amber-100 text-amber-700 mr-1">추천</span>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-purple-100 text-purple-700">★ 가성비픽</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 일반의약품 -->
+    <div class="sub-header text-sm font-bold text-[#7a3a3a] bg-[#fce8e8] rounded-xl px-3 py-2 mb-3 flex items-center gap-2" data-cat="rx">💊 일반의약품 (약국 구매)</div>
+    <div class="products-grid grid grid-cols-2 sm:grid-cols-3 gap-3">
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="rx">
+        <div class="img-wrap aspect-square overflow-hidden bg-white"><img class="w-full h-full object-cover" src="images/fatima.png" alt="파티마겔" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs font-bold" style="color:#c62828;">약국 전용</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">파티마겔 (과산화벤조일)</div>
+          <div class="text-xs text-gray-500 mt-1">Benzoyl Peroxide · 살균</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-pink-100 text-red-800">의약품</span>
+          <div class="text-[11px] text-gray-500 mt-1.5 leading-relaxed">사용법: 크림 단계 후 스팟<br>주 2~3회 · BHA 날 사용금지<br>⚠ 옷·베개 탈색 주의</div>
+        </div>
+      </div>
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="rx">
+        <div class="img-wrap aspect-square overflow-hidden bg-white"><img class="w-full h-full object-cover" src="images/azalea.png" alt="아젤리아 크림" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs font-bold" style="color:#7b1fa2;">약국 전용</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">아젤리아 (아젤라산)</div>
+          <div class="text-xs text-gray-500 mt-1">Azelaic Acid · 항균·항염·홍조</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-pink-100 text-red-800">의약품</span>
+          <div class="text-[11px] text-gray-500 mt-1.5 leading-relaxed">사용법: 로션 전 홍조·여드름 부위<br>주 2~3회 (A일·C일) · BHA 날 금지<br>홍조+화농성 동시 케어</div>
+        </div>
       </div>
     </div>
   </div>
@@ -438,28 +586,32 @@
 
 <!-- TAB4: 집중케어 -->
 <div class="tab-pane" id="schedule">
-  <div class="section">
-    <div class="section-title">PM 집중 케어 — 격일 교차 스케줄</div>
-    <div class="table-wrap">
-      <table class="schedule-table">
+  <div class="mb-10 pt-6">
+    <h2 class="text-lg font-extrabold text-[#e8507a] border-l-4 border-[#e8507a] pl-3 mb-4">PM 집중 케어 — 격일 교차 스케줄</h2>
+    <div class="overflow-x-auto -mx-4 px-4">
+      <table class="w-full border-collapse bg-white rounded-2xl overflow-hidden shadow-md" style="min-width:520px;">
         <thead>
-          <tr><th>날짜</th><th>추가 제품</th><th>주의사항</th></tr>
+          <tr class="bg-[#fce8e8] text-[#b85c5c]">
+            <th class="px-3 py-2.5 text-left text-xs font-bold whitespace-nowrap">날짜</th>
+            <th class="px-3 py-2.5 text-left text-xs font-bold whitespace-nowrap">추가 제품</th>
+            <th class="px-3 py-2.5 text-left text-xs font-bold whitespace-nowrap">주의사항</th>
+          </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><span class="day-a">A일 (월·수·금)</span></td>
-            <td>더마팩토리 <strong>나이아신아마이드 20%</strong> + 아젤리아 스팟 가능</td>
-            <td>나이아신 도포 후 10분 대기. 아젤리아 → 로션 → 파티마겔 순서</td>
+          <tr class="border-b border-gray-100">
+            <td class="px-3 py-3 text-xs whitespace-nowrap font-bold text-[#e91e63]">A일 (월·수·금)</td>
+            <td class="px-3 py-3 text-xs whitespace-nowrap">더마팩토리 <strong>나이아신아마이드 20%</strong> + 아젤리아 스팟 가능</td>
+            <td class="px-3 py-3 text-xs whitespace-nowrap">나이아신 도포 후 10분 대기. 아젤리아 → 로션 → 파티마겔 순서</td>
+          </tr>
+          <tr class="border-b border-gray-100">
+            <td class="px-3 py-3 text-xs whitespace-nowrap font-bold text-[#2196f3]">B일 (화·목·토)</td>
+            <td class="px-3 py-3 text-xs whitespace-nowrap"><strong>BHA 패드 (셀리맥스)</strong></td>
+            <td class="px-3 py-3 text-xs whitespace-nowrap">T존·나비존 닦아내기. 아젤리아·파티마겔 <span class="text-red-600 font-bold">모두 금지</span></td>
           </tr>
           <tr>
-            <td><span class="day-b">B일 (화·목·토)</span></td>
-            <td><strong>BHA 패드 (셀리맥스)</strong></td>
-            <td>T존·나비존 닦아내기. 아젤리아·파티마겔 <span style="color:#e53935;font-weight:700;">모두 금지</span></td>
-          </tr>
-          <tr>
-            <td><span class="day-c">C일 (일)</span></td>
-            <td>피부 휴식 + 아젤리아 스팟 + 파티마겔 스팟 가능</td>
-            <td>팩 or 보습 집중. 아젤리아 → 로션 → 파티마겔 순서 유지</td>
+            <td class="px-3 py-3 text-xs whitespace-nowrap font-bold text-[#4caf50]">C일 (일)</td>
+            <td class="px-3 py-3 text-xs whitespace-nowrap">피부 휴식 + 아젤리아 스팟 + 파티마겔 스팟 가능</td>
+            <td class="px-3 py-3 text-xs whitespace-nowrap">팩 or 보습 집중. 아젤리아 → 로션 → 파티마겔 순서 유지</td>
           </tr>
         </tbody>
       </table>
@@ -469,25 +621,29 @@
 
 <!-- TAB5: 성분가이드 -->
 <div class="tab-pane" id="ingredients">
-  <div class="section">
-    <div class="section-title">성분 충돌 &amp; 병용 가이드</div>
-    <div class="table-wrap">
-      <table class="conflict-table">
+  <div class="mb-10 pt-6">
+    <h2 class="text-lg font-extrabold text-[#e8507a] border-l-4 border-[#e8507a] pl-3 mb-4">성분 충돌 &amp; 병용 가이드</h2>
+    <div class="overflow-x-auto -mx-4 px-4">
+      <table class="w-full border-collapse bg-white rounded-2xl overflow-hidden shadow-md">
         <thead>
-          <tr><th>조합</th><th>판정</th><th>설명</th></tr>
+          <tr class="bg-[#fce8e8] text-[#b85c5c]">
+            <th class="px-3 py-2.5 text-left text-xs font-bold whitespace-nowrap">조합</th>
+            <th class="px-3 py-2.5 text-left text-xs font-bold whitespace-nowrap">판정</th>
+            <th class="px-3 py-2.5 text-left text-xs font-bold whitespace-nowrap">설명</th>
+          </tr>
         </thead>
         <tbody>
-          <tr><td>나이아신아마이드 20% + BHA</td><td><span class="warn-chip">⚠ 주의</span></td><td>초기 4~6주 같은 날 금지. 적응 후 BHA → 나이아신 순서</td></tr>
-          <tr><td>나이아신아마이드 20% + 비타민C</td><td><span class="warn-chip">⚠ 주의</span></td><td>니코틴산 변환 → 홍조 유발 가능. 시간차 두고 사용</td></tr>
-          <tr><td>BHA + 시카 토너</td><td><span class="ok-chip">✓ 가능</span></td><td>BHA 후 시카로 진정 — 좋은 조합</td></tr>
-          <tr><td>어성초 세럼 + 히알루론산 앰플</td><td><span class="ok-chip">✓ 가능</span></td><td>충돌 없음</td></tr>
-          <tr><td>PDRN 토너 + 모든 성분</td><td><span class="ok-chip">✓ 가능</span></td><td>재생 성분, 타 성분과 충돌 없음</td></tr>
-          <tr><td><strong>파티마겔 + BHA</strong></td><td><span class="danger-chip">✗ 금지</span></td><td>같은 날 병용 절대 금지 — 자극 과부하, 장벽 손상</td></tr>
-          <tr><td>파티마겔 + 나이아신아마이드 20%</td><td><span class="ok-chip">✓ 가능</span></td><td>크림 후 스팟이므로 직접 접촉 없음</td></tr>
-          <tr><td><strong>아젤리아 + BHA</strong></td><td><span class="warn-chip">⚠ 주의</span></td><td>초기 4~6주 금지. 적응 후 가능하나 주의</td></tr>
-          <tr><td>아젤리아 + 나이아신아마이드 20%</td><td><span class="ok-chip">✓ 가능</span></td><td>홍조·잡티 시너지. 병용 가능</td></tr>
-          <tr><td>아젤리아 + 어성초 세럼</td><td><span class="ok-chip">✓ 가능</span></td><td>항균 효과 중복 강화</td></tr>
-          <tr><td>아젤리아 + 파티마겔</td><td><span class="ok-chip">✓ 가능</span></td><td>아젤리아(로션 전) → 로션 → 파티마겔(스팟) 순서 유지</td></tr>
+          <tr class="border-b border-gray-100"><td class="px-3 py-2.5 text-xs whitespace-nowrap">나이아신아마이드 20% + BHA</td><td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="inline-block bg-amber-100 text-amber-700 font-bold px-2 py-0.5 rounded-full text-[11px]">⚠ 주의</span></td><td class="px-3 py-2.5 text-xs whitespace-nowrap">초기 4~6주 같은 날 금지. 적응 후 BHA → 나이아신 순서</td></tr>
+          <tr class="border-b border-gray-100"><td class="px-3 py-2.5 text-xs whitespace-nowrap">나이아신아마이드 20% + 비타민C</td><td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="inline-block bg-amber-100 text-amber-700 font-bold px-2 py-0.5 rounded-full text-[11px]">⚠ 주의</span></td><td class="px-3 py-2.5 text-xs whitespace-nowrap">니코틴산 변환 → 홍조 유발 가능. 시간차 두고 사용</td></tr>
+          <tr class="border-b border-gray-100"><td class="px-3 py-2.5 text-xs whitespace-nowrap">BHA + 시카 토너</td><td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="inline-block bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✓ 가능</span></td><td class="px-3 py-2.5 text-xs whitespace-nowrap">BHA 후 시카로 진정 — 좋은 조합</td></tr>
+          <tr class="border-b border-gray-100"><td class="px-3 py-2.5 text-xs whitespace-nowrap">어성초 세럼 + 히알루론산 앰플</td><td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="inline-block bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✓ 가능</span></td><td class="px-3 py-2.5 text-xs whitespace-nowrap">충돌 없음</td></tr>
+          <tr class="border-b border-gray-100"><td class="px-3 py-2.5 text-xs whitespace-nowrap">PDRN 토너 + 모든 성분</td><td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="inline-block bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✓ 가능</span></td><td class="px-3 py-2.5 text-xs whitespace-nowrap">재생 성분, 타 성분과 충돌 없음</td></tr>
+          <tr class="border-b border-gray-100"><td class="px-3 py-2.5 text-xs whitespace-nowrap"><strong>파티마겔 + BHA</strong></td><td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="inline-block bg-red-100 text-red-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✗ 금지</span></td><td class="px-3 py-2.5 text-xs whitespace-nowrap">같은 날 병용 절대 금지 — 자극 과부하, 장벽 손상</td></tr>
+          <tr class="border-b border-gray-100"><td class="px-3 py-2.5 text-xs whitespace-nowrap">파티마겔 + 나이아신아마이드 20%</td><td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="inline-block bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✓ 가능</span></td><td class="px-3 py-2.5 text-xs whitespace-nowrap">크림 후 스팟이므로 직접 접촉 없음</td></tr>
+          <tr class="border-b border-gray-100"><td class="px-3 py-2.5 text-xs whitespace-nowrap"><strong>아젤리아 + BHA</strong></td><td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="inline-block bg-amber-100 text-amber-700 font-bold px-2 py-0.5 rounded-full text-[11px]">⚠ 주의</span></td><td class="px-3 py-2.5 text-xs whitespace-nowrap">초기 4~6주 금지. 적응 후 가능하나 주의</td></tr>
+          <tr class="border-b border-gray-100"><td class="px-3 py-2.5 text-xs whitespace-nowrap">아젤리아 + 나이아신아마이드 20%</td><td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="inline-block bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✓ 가능</span></td><td class="px-3 py-2.5 text-xs whitespace-nowrap">홍조·잡티 시너지. 병용 가능</td></tr>
+          <tr class="border-b border-gray-100"><td class="px-3 py-2.5 text-xs whitespace-nowrap">아젤리아 + 어성초 세럼</td><td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="inline-block bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✓ 가능</span></td><td class="px-3 py-2.5 text-xs whitespace-nowrap">항균 효과 중복 강화</td></tr>
+          <tr><td class="px-3 py-2.5 text-xs whitespace-nowrap">아젤리아 + 파티마겔</td><td class="px-3 py-2.5 text-xs whitespace-nowrap"><span class="inline-block bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full text-[11px]">✓ 가능</span></td><td class="px-3 py-2.5 text-xs whitespace-nowrap">아젤리아(로션 전) → 로션 → 파티마겔(스팟) 순서 유지</td></tr>
         </tbody>
       </table>
     </div>
@@ -496,22 +652,30 @@
 
 </div><!-- /container -->
 
-<footer>가격 및 기획상품 정보는 변동될 수 있으므로 구매 전 올리브영 공식 사이트 재확인 권장 · 이미지 출처: 올리브영</footer>
+<footer class="text-center py-6 text-xs text-gray-300">가격 및 기획상품 정보는 변동될 수 있으므로 구매 전 올리브영 공식 사이트 재확인 권장 · 이미지 출처: 올리브영</footer>
 
 <script>
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      b.style.background = '#f0e0e5';
+      b.style.color = '#6b7280';
+    });
     document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
+    btn.style.background = '#e8507a';
+    btn.style.color = 'white';
     document.getElementById(btn.dataset.tab).classList.add('active');
   });
 });
 
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      b.style.background = 'white';
+      b.style.color = '#e8507a';
+    });
+    btn.style.background = '#e8507a';
+    btn.style.color = 'white';
     const cat = btn.dataset.cat;
     document.querySelectorAll('#products .product-card').forEach(card => {
       if (cat === 'all' || card.dataset.cat === cat) {
@@ -519,6 +683,17 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
       } else {
         card.style.display = 'none';
       }
+    });
+    document.querySelectorAll('#products .sub-header').forEach(header => {
+      if (cat === 'all' || header.dataset.cat === cat) {
+        header.style.display = '';
+      } else {
+        header.style.display = 'none';
+      }
+    });
+    document.querySelectorAll('#products .products-grid').forEach(grid => {
+      const visible = grid.querySelectorAll('.product-card:not([style*="display: none"]):not([style*="display:none"])');
+      grid.style.display = visible.length ? '' : 'none';
     });
   });
 });
