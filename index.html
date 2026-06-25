@@ -412,9 +412,7 @@ tailwind.config = {
       </div>
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="cica">
         <div class="img-wrap aspect-square overflow-hidden bg-gray-50">
-          <a href="https://oy.run/jdrnRewWVyct2u" target="_blank">
             <img class="w-full h-full object-contain" src="images/larochposay_cica.jpg" alt="라로슈포제 시카플라스트 밤 B5+" loading="lazy">
-          </a>
         </div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">라로슈포제</div>
@@ -521,9 +519,7 @@ tailwind.config = {
     <div class="products-grid grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="sunscreen">
         <div class="img-wrap aspect-square overflow-hidden bg-gray-50">
-          <a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000149135" target="_blank">
             <img class="w-full h-full object-contain" src="images/roundlab_sun.jpg" alt="라운드랩 자작나무 수분 선크림" loading="lazy">
-          </a>
         </div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">라운드랩</div>
@@ -535,9 +531,7 @@ tailwind.config = {
       </div>
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="sunscreen">
         <div class="img-wrap aspect-square overflow-hidden bg-gray-50">
-          <a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000173774" target="_blank">
             <img class="w-full h-full object-contain" src="images/torriden_sun.jpg" alt="토리든 다이브인 선크림" loading="lazy">
-          </a>
         </div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">토리든</div>
@@ -550,9 +544,7 @@ tailwind.config = {
       </div>
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="sunscreen">
         <div class="img-wrap aspect-square overflow-hidden bg-gray-50">
-          <a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000181078" target="_blank">
             <img class="w-full h-full object-contain" src="images/aestura_sun.jpg" alt="에스트라 더마UV365 선크림" loading="lazy">
-          </a>
         </div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">에스트라</div>
@@ -588,9 +580,7 @@ tailwind.config = {
       </div>
       <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="sunscreen">
         <div class="img-wrap aspect-square overflow-hidden bg-gray-50">
-          <a href="https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000219554" target="_blank">
             <img class="w-full h-full object-contain" src="images/gudal_sun.jpg" alt="구달 맑은 어성초 수분 선크림" loading="lazy">
-          </a>
         </div>
         <div class="p-3">
           <div class="text-xs text-[#e8507a] font-bold">구달</div>
@@ -936,46 +926,49 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 
 // 올리브영 검색 URL 자동 생성
 (function() {
-  const OY_SEARCH = 'https://www.oliveyoung.co.kr/store/search/getSearchMain.do?query=';
+  const BASE = 'https://www.oliveyoung.co.kr/store/search/getSearchMain.do';
+  const PARAMS = '&giftYn=N&t_page=%ED%99%88&t_click=%EA%B2%80%EC%83%89%EC%B0%BD&t_search_name=';
 
-  function buildSearchUrl(brand, name) {
-    // 용량·기획 텍스트 제거
-    const cleanName = name
-      .replace(/\s*\d+\.?\d*\s*(ml|g|매|개)\b.*/gi, '')
-      .replace(/\s*(더블기획|리필기획|기획|듀오|세트|기획상품).*$/g, '')
-      .replace(/\s*\([^)]*\)\s*$/, '')
-      .trim();
-    const query = (brand + ' ' + cleanName).trim();
-    return OY_SEARCH + encodeURIComponent(query) + '&giftYn=N';
+  function buildUrl(q) {
+    const enc = encodeURIComponent(q);
+    return BASE + '?query=' + enc + PARAMS + enc;
   }
 
-  document.querySelectorAll('.product-card').forEach(card => {
-    // 약국 제품·다이소 제품 제외
+  document.querySelectorAll('#products .product-card').forEach(card => {
     if (card.dataset.cat === 'rx') return;
-    if (card.querySelector('.tag-nodaiso')) return;
 
-    const brandEl = card.querySelector('.text-gray-400.font-medium');
-    const nameEl  = card.querySelector('.leading-tight');
-    if (!brandEl || !nameEl) return;
-
+    const brandEl = card.querySelector('.p-3 > div:first-child');
+    if (!brandEl) return;
     const brand = brandEl.textContent.trim();
-    const name  = nameEl.textContent.trim();
-    const url   = buildSearchUrl(brand, name);
+    if (brand.includes('다이소')) return;
 
-    // 기존 getGoodsDetail 링크를 검색 URL로 교체
-    card.querySelectorAll('a[href*="getGoodsDetail"]').forEach(a => {
+    const nameEl = card.querySelector('.leading-tight');
+    if (!nameEl) return;
+    const cleanName = nameEl.textContent.trim()
+      .replace(/\s*\d[\d.]*\s*(ml|g|매|개)\b.*/gi, '')
+      .replace(/\s*(더블기획|리필기획|기획|세트).*$/g, '')
+      .trim();
+
+    const url = buildUrl(brand + ' ' + cleanName);
+
+    const imgWrap = card.querySelector('.img-wrap');
+    if (!imgWrap) return;
+    const img = imgWrap.querySelector('img');
+    if (!img) return;
+
+    const existingA = imgWrap.querySelector('a');
+    if (existingA) {
+      existingA.href = url;
+      existingA.target = '_blank';
+      existingA.rel = 'noopener';
+    } else {
+      const a = document.createElement('a');
       a.href = url;
       a.target = '_blank';
       a.rel = 'noopener';
-    });
-
-    // 카드 전체 클릭 (링크 외 영역)
-    card.style.cursor = 'pointer';
-    card.addEventListener('click', e => {
-      if (!e.target.closest('a')) {
-        window.open(url, '_blank', 'noopener');
-      }
-    });
+      img.parentNode.insertBefore(a, img);
+      a.appendChild(img);
+    }
   });
 })();</script>
 </body>
