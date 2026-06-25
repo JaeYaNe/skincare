@@ -59,6 +59,7 @@ tailwind.config = {
   <button class="tab-btn flex-shrink-0 px-4 py-2 rounded-t-xl text-sm font-semibold cursor-pointer border-none bg-[#f0e0e5] text-gray-500 transition-colors duration-200" data-tab="routine">📋 루틴</button>
   <button class="tab-btn flex-shrink-0 px-4 py-2 rounded-t-xl text-sm font-semibold cursor-pointer border-none bg-[#f0e0e5] text-gray-500 transition-colors duration-200" data-tab="products">🛒 제품쇼핑</button>
 <button class="tab-btn flex-shrink-0 px-4 py-2 rounded-t-xl text-sm font-semibold cursor-pointer border-none bg-[#f0e0e5] text-gray-500 transition-colors duration-200" data-tab="ingredients">⚗️ 성분가이드</button>
+  <button class="tab-btn flex-shrink-0 px-4 py-2 rounded-t-xl text-sm font-semibold cursor-pointer border-none bg-[#f0e0e5] text-gray-500 transition-colors duration-200" data-tab="inginfo">🔬 성분정보</button>
 </div></div>
 
 <div class="max-w-4xl mx-auto px-4 pb-16">
@@ -727,6 +728,233 @@ tailwind.config = {
         <div class="flex-1 text-xs text-gray-500">아젤리아(로션 전) → 로션 → 파티마겔(스팟) 순서 유지</div>
       </div>
     </div>
+  </div>
+</div>
+
+
+<!-- TAB5: 성분정보 -->
+<div class="tab-pane" id="inginfo">
+  <div class="mb-10 pt-1">
+
+    <!-- pH 수치별 안내 -->
+    <h2 class="text-lg font-extrabold text-[#e8507a] border-l-4 border-[#e8507a] pl-3 mb-2">pH 수치별 피부 영향</h2>
+    <p class="text-xs text-gray-400 mb-4 pl-1">수부지·홍조 피부는 pH 4.5–6.0 약산성 제품으로 피부 장벽(산성막) 유지가 핵심</p>
+    <div class="space-y-2 mb-8">
+      <div class="flex items-center gap-3 bg-white rounded-2xl shadow-sm p-3">
+        <div class="flex-shrink-0 w-16 text-center">
+          <div class="text-base font-extrabold text-green-600">4.5–5.5</div>
+          <div class="text-[10px] text-green-500 font-semibold">최적</div>
+        </div>
+        <div class="flex-1">
+          <div class="text-xs font-bold text-gray-800">약산성 — 피부 산성막과 동일</div>
+          <div class="text-xs text-gray-500 mt-0.5">유해균 억제, 장벽 유지, 수분 손실 최소화. 홍조·트러블 피부에 가장 적합한 세안제·토너 pH 범위</div>
+        </div>
+        <span class="flex-shrink-0 text-[11px] px-2 py-0.5 rounded-full font-bold bg-green-100 text-green-700">권장</span>
+      </div>
+      <div class="flex items-center gap-3 bg-white rounded-2xl shadow-sm p-3">
+        <div class="flex-shrink-0 w-16 text-center">
+          <div class="text-base font-extrabold text-blue-500">5.5–6.5</div>
+          <div class="text-[10px] text-blue-400 font-semibold">허용</div>
+        </div>
+        <div class="flex-1">
+          <div class="text-xs font-bold text-gray-800">중성에 가까운 약산성</div>
+          <div class="text-xs text-gray-500 mt-0.5">일상 세안에 무리 없음. 단 BHA·AHA 활성도가 다소 낮아짐. 대부분의 폼클렌저 범위</div>
+        </div>
+        <span class="flex-shrink-0 text-[11px] px-2 py-0.5 rounded-full font-bold bg-blue-100 text-blue-600">허용</span>
+      </div>
+      <div class="flex items-center gap-3 bg-white rounded-2xl shadow-sm p-3">
+        <div class="flex-shrink-0 w-16 text-center">
+          <div class="text-base font-extrabold text-amber-500">6.5–7.5</div>
+          <div class="text-[10px] text-amber-400 font-semibold">주의</div>
+        </div>
+        <div class="flex-1">
+          <div class="text-xs font-bold text-gray-800">중성 — 피부 장벽 중화 가능</div>
+          <div class="text-xs text-gray-500 mt-0.5">산성막이 일시 손상 → 유해균 증식 가능. 홍조·여드름 피부에서 세안 후 당김·붉어짐 원인. 일반 비누 범위</div>
+        </div>
+        <span class="flex-shrink-0 text-[11px] px-2 py-0.5 rounded-full font-bold bg-amber-100 text-amber-700">주의</span>
+      </div>
+      <div class="flex items-center gap-3 bg-red-50 rounded-2xl shadow-sm p-3 border border-red-200">
+        <div class="flex-shrink-0 w-16 text-center">
+          <div class="text-base font-extrabold text-red-600">7.5+</div>
+          <div class="text-[10px] text-red-400 font-semibold">위험</div>
+        </div>
+        <div class="flex-1">
+          <div class="text-xs font-bold text-gray-800">알칼리성 — 장벽 파괴</div>
+          <div class="text-xs text-gray-500 mt-0.5">SLS 기반 세정제·일반 비누 pH 9–11. 피지막 완전 제거 → 과분비 반응, 홍조 악화, 건조 유발. 수부지 절대 금지</div>
+        </div>
+        <span class="flex-shrink-0 text-[11px] px-2 py-0.5 rounded-full font-bold bg-red-100 text-red-700">금지</span>
+      </div>
+    </div>
+
+    <!-- 성분별 효과 -->
+    <h2 class="text-lg font-extrabold text-[#e8507a] border-l-4 border-[#e8507a] pl-3 mb-2">핵심 성분별 효과 & 사용법</h2>
+    <p class="text-xs text-gray-400 mb-4 pl-1">수부지+홍조+여드름 루틴에 사용 중인 주요 성분 상세 가이드</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+
+      <div class="bg-white rounded-2xl shadow-md p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-lg">🌿</span>
+          <div>
+            <div class="text-sm font-extrabold text-[#e8507a]">시카 (센텔라 아시아티카)</div>
+            <div class="text-[11px] text-gray-400">Centella Asiatica · Madecassoside · Asiaticoside</div>
+          </div>
+        </div>
+        <div class="space-y-1.5">
+          <div class="flex gap-2 text-xs"><span class="text-green-600 font-bold flex-shrink-0">효과</span><span class="text-gray-600">홍조 완화 · 모세혈관 강화 · 피부 장벽 재생 · 항염</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-blue-600 font-bold flex-shrink-0">적용</span><span class="text-gray-600">AM·PM 모두 사용 가능. 토너·세럼·크림 모든 제형 안전</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-amber-600 font-bold flex-shrink-0">주의</span><span class="text-gray-600">레티놀과 동시 사용 시 효과 감소 가능. 별도 시간대 권장</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-purple-600 font-bold flex-shrink-0">추천%</span><span class="text-gray-600">마데카소사이드 0.1%+ / 아시아티코사이드 함유 제품 선택</span></div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-md p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-lg">🌱</span>
+          <div>
+            <div class="text-sm font-extrabold text-[#e8507a]">어성초 (Houttuynia Cordata)</div>
+            <div class="text-[11px] text-gray-400">Houttuynia Cordata Extract</div>
+          </div>
+        </div>
+        <div class="space-y-1.5">
+          <div class="flex gap-2 text-xs"><span class="text-green-600 font-bold flex-shrink-0">효과</span><span class="text-gray-600">여드름균(C.acnes) 억제 · 항균 · 항산화 · 피지 조절</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-blue-600 font-bold flex-shrink-0">적용</span><span class="text-gray-600">PM 세럼 단계 집중 도포. 트러블 부위 집중 사용 효과적</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-amber-600 font-bold flex-shrink-0">주의</span><span class="text-gray-600">특유의 향 있음. 고함량(50%+) 제품은 초기 자극 가능</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-purple-600 font-bold flex-shrink-0">추천%</span><span class="text-gray-600">어성초 77% (아누아), 50%+ 함유 제품이 효과 우수</span></div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-md p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-lg">💊</span>
+          <div>
+            <div class="text-sm font-extrabold text-[#e8507a]">판테놀 (비타민 B5)</div>
+            <div class="text-[11px] text-gray-400">Panthenol · D-Panthenol · Provitamin B5</div>
+          </div>
+        </div>
+        <div class="space-y-1.5">
+          <div class="flex gap-2 text-xs"><span class="text-green-600 font-bold flex-shrink-0">효과</span><span class="text-gray-600">피부 장벽 강화 · 보습 · 상처 재생 · 가려움 완화</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-blue-600 font-bold flex-shrink-0">적용</span><span class="text-gray-600">AM 격일(주 3~4회) 앰플 단계. 모든 성분과 병용 가능</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-amber-600 font-bold flex-shrink-0">주의</span><span class="text-gray-600">사실상 자극 없는 안전 성분. 충분히 도포해도 무방</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-purple-600 font-bold flex-shrink-0">추천%</span><span class="text-gray-600">1%+ 함유 앰플. 라로슈포제 시카플라스트 B5+ 크림 포함</span></div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-md p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-lg">🧴</span>
+          <div>
+            <div class="text-sm font-extrabold text-[#e8507a]">BHA (살리실산)</div>
+            <div class="text-[11px] text-gray-400">Salicylic Acid · Beta Hydroxy Acid</div>
+          </div>
+        </div>
+        <div class="space-y-1.5">
+          <div class="flex gap-2 text-xs"><span class="text-green-600 font-bold flex-shrink-0">효과</span><span class="text-gray-600">지용성 → 모공 속 피지·각질 용해 · 블랙헤드 · 여드름 예방</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-blue-600 font-bold flex-shrink-0">적용</span><span class="text-gray-600">PM 주 2~3회 패드 사용. pH 3.0–4.0에서 최대 효과</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-amber-600 font-bold flex-shrink-0">주의</span><span class="text-gray-600">파티마겔(BPO) 같은 날 금지 · 나이아신아마이드 초기 4~6주 금지</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-purple-600 font-bold flex-shrink-0">추천%</span><span class="text-gray-600">0.5–2% 범위. 코스알엑스 패드 0.5% · 셀리맥스 패드</span></div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-md p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-lg">💧</span>
+          <div>
+            <div class="text-sm font-extrabold text-[#e8507a]">히알루론산 (Hyaluronic Acid)</div>
+            <div class="text-[11px] text-gray-400">Sodium Hyaluronate · HA · 폴리글루타민산</div>
+          </div>
+        </div>
+        <div class="space-y-1.5">
+          <div class="flex gap-2 text-xs"><span class="text-green-600 font-bold flex-shrink-0">효과</span><span class="text-gray-600">자기 무게 1000배 수분 흡수 · U존 건조 즉각 개선</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-blue-600 font-bold flex-shrink-0">적용</span><span class="text-gray-600">AM·PM 토너~앰플 단계. 도포 후 즉시 다음 단계로 밀봉 필수</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-amber-600 font-bold flex-shrink-0">주의</span><span class="text-gray-600">건조한 환경에서 단독 사용 시 오히려 수분 증발 가능 → 크림으로 마무리</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-purple-600 font-bold flex-shrink-0">추천%</span><span class="text-gray-600">저분자+고분자 HA 복합 제품이 흡수율 우수</span></div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-md p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-lg">⚡</span>
+          <div>
+            <div class="text-sm font-extrabold text-[#e8507a]">나이아신아마이드 (Niacinamide)</div>
+            <div class="text-[11px] text-gray-400">Vitamin B3 · 비타민 B3</div>
+          </div>
+        </div>
+        <div class="space-y-1.5">
+          <div class="flex gap-2 text-xs"><span class="text-green-600 font-bold flex-shrink-0">효과</span><span class="text-gray-600">피지 억제 · 모공 수축 · 잡티 개선 · 장벽 강화</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-blue-600 font-bold flex-shrink-0">적용</span><span class="text-gray-600">PM 격일(주 3회). 20% 고함량은 초기 자극 유의</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-amber-600 font-bold flex-shrink-0">주의</span><span class="text-gray-600">비타민C와 함께 사용 시 홍조 유발 가능. BHA 초기 병용 주의</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-purple-600 font-bold flex-shrink-0">추천%</span><span class="text-gray-600">5–10% 일상 사용 / 20% 격일 집중 관리</span></div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-md p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-lg">🔬</span>
+          <div>
+            <div class="text-sm font-extrabold text-[#e8507a]">아젤라산 (Azelaic Acid)</div>
+            <div class="text-[11px] text-gray-400">Azelaic Acid · 아젤리아 크림 유효성분</div>
+          </div>
+        </div>
+        <div class="space-y-1.5">
+          <div class="flex gap-2 text-xs"><span class="text-green-600 font-bold flex-shrink-0">효과</span><span class="text-gray-600">항균 · 항염 · 홍조 완화(로사세아) · 잡티 개선</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-blue-600 font-bold flex-shrink-0">적용</span><span class="text-gray-600">PM 로션 전 홍조·여드름 부위. 주 2~3회(A·C일)</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-amber-600 font-bold flex-shrink-0">주의</span><span class="text-gray-600">BHA 같은 날 초기 4~6주 금지. 초기 따끔거림 정상 반응</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-purple-600 font-bold flex-shrink-0">추천%</span><span class="text-gray-600">10% (아젤리아 크림) — 약국 처방 의약품</span></div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-md p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-lg">💣</span>
+          <div>
+            <div class="text-sm font-extrabold text-[#e8507a]">과산화벤조일 (BPO)</div>
+            <div class="text-[11px] text-gray-400">Benzoyl Peroxide · 파티마겔 유효성분</div>
+          </div>
+        </div>
+        <div class="space-y-1.5">
+          <div class="flex gap-2 text-xs"><span class="text-green-600 font-bold flex-shrink-0">효과</span><span class="text-gray-600">여드름균 살균 · 염증성 여드름 직접 타격</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-blue-600 font-bold flex-shrink-0">적용</span><span class="text-gray-600">크림 후 스팟만 도포. 주 2~3회. BHA 날 사용 금지</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-red-600 font-bold flex-shrink-0">경고</span><span class="text-gray-600">옷·베개·수건 탈색 주의. 도포 후 30분 건조 후 취침</span></div>
+          <div class="flex gap-2 text-xs"><span class="text-purple-600 font-bold flex-shrink-0">추천%</span><span class="text-gray-600">2.5% (파티마겔) — 약국 일반의약품</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 계면활성제 가이드 -->
+    <h2 class="text-lg font-extrabold text-[#e8507a] border-l-4 border-[#e8507a] pl-3 mb-2">세안제 계면활성제 선택 가이드</h2>
+    <p class="text-xs text-gray-400 mb-4 pl-1">수부지 피부는 계면활성제 선택이 홍조·건조 악화의 핵심 변수</p>
+    <div class="space-y-2">
+      <div class="bg-green-50 rounded-2xl shadow-sm p-3 flex items-start gap-3 border border-green-200">
+        <span class="flex-shrink-0 text-[11px] px-2 py-0.5 rounded-full font-bold bg-green-100 text-green-700 mt-0.5">권장</span>
+        <div>
+          <div class="text-xs font-bold text-gray-800">베타인 (Cocamidopropyl Betaine) · 글루코시드류</div>
+          <div class="text-xs text-gray-500 mt-0.5">식물 유래 양쪽성 계면활성제. 가장 저자극. 닥터지·브링그린 계열. 피부 장벽 손상 최소</div>
+        </div>
+      </div>
+      <div class="bg-green-50 rounded-2xl shadow-sm p-3 flex items-start gap-3 border border-green-200">
+        <span class="flex-shrink-0 text-[11px] px-2 py-0.5 rounded-full font-bold bg-green-100 text-green-700 mt-0.5">권장</span>
+        <div>
+          <div class="text-xs font-bold text-gray-800">SLES (Sodium Laureth Sulfate)</div>
+          <div class="text-xs text-gray-500 mt-0.5">SLS 대비 자극 낮음. pH 5~6 제품에서 사용 시 안전. 라로슈포제 에파클라 계열</div>
+        </div>
+      </div>
+      <div class="bg-amber-50 rounded-2xl shadow-sm p-3 flex items-start gap-3 border border-amber-200">
+        <span class="flex-shrink-0 text-[11px] px-2 py-0.5 rounded-full font-bold bg-amber-100 text-amber-700 mt-0.5">주의</span>
+        <div>
+          <div class="text-xs font-bold text-gray-800">TEA (Triethanolamine) 기반</div>
+          <div class="text-xs text-gray-500 mt-0.5">pH 7+ 알칼리성 유도. 아누아 어성초 클렌저 소량 함유. 민감도 높은 날 회피 권장</div>
+        </div>
+      </div>
+      <div class="bg-red-50 rounded-2xl shadow-sm p-3 flex items-start gap-3 border border-red-200">
+        <span class="flex-shrink-0 text-[11px] px-2 py-0.5 rounded-full font-bold bg-red-100 text-red-700 mt-0.5">금지</span>
+        <div>
+          <div class="text-xs font-bold text-gray-800">SLS (Sodium Lauryl Sulfate)</div>
+          <div class="text-xs text-gray-500 mt-0.5">강력한 음이온 계면활성제. pH 9~11 유도. 피지막 완전 제거 → 수부지 홍조·건조 악화 주원인. 성분표 최상단 위치 제품 회피</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
