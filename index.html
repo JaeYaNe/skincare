@@ -204,6 +204,8 @@ tailwind.config = {
     <div class="flex flex-wrap gap-2 mb-5">
       <button class="filter-btn flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold cursor-pointer border-2 border-[#e8507a] transition-colors duration-200" data-cat="all" style="background:#e8507a;color:white;">전체</button>
       <button class="filter-btn flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold cursor-pointer border-2 border-[#e8507a] bg-white text-[#e8507a] transition-colors duration-200" data-cat="owned">보유</button>
+      <button class="filter-btn flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold cursor-pointer border-2 border-[#e8507a] bg-white text-[#e8507a] transition-colors duration-200" data-cat="cleansingfoam">클렌징폼</button>
+      <button class="filter-btn flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold cursor-pointer border-2 border-[#e8507a] bg-white text-[#e8507a] transition-colors duration-200" data-cat="milk">밀크</button>
       <button class="filter-btn flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold cursor-pointer border-2 border-[#e8507a] bg-white text-[#e8507a] transition-colors duration-200" data-cat="cica">시카</button>
       <button class="filter-btn flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold cursor-pointer border-2 border-[#e8507a] bg-white text-[#e8507a] transition-colors duration-200" data-cat="houttuynia">어성초</button>
       <button class="filter-btn flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold cursor-pointer border-2 border-[#e8507a] bg-white text-[#e8507a] transition-colors duration-200" data-cat="panthenol">판테놀</button>
@@ -269,6 +271,133 @@ tailwind.config = {
           <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">로션 (마무리 보습)</div>
           <div class="text-xs text-gray-500 mt-1">보습 · 마무리 레이어</div>
           <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-pink-100 text-[#e8507a]">✓ 보유</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 클렌징폼 -->
+    <div class="sub-header text-sm font-bold text-[#7a3a3a] bg-[#fce8e8] rounded-xl px-3 py-2 mb-3 flex items-center gap-2" data-cat="cleansingfoam">🧼 클렌징폼 — 약산성 저자극 세안</div>
+    <div class="products-grid grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="cleansingfoam">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/lrp_efaclar.jpg" alt="라로슈포제 에파클라 퓨리파잉 포밍 젤" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">라로슈포제</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">에파클라 퓨리파잉 포밍 젤 400ml</div>
+          <div class="text-xs text-gray-500 mt-1">징크 피리치온 · 나이아신아마이드 · pH5.5 약산성</div>
+          <div class="text-sm font-bold text-[#e8507a] mt-1">~25,000원</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-amber-100 text-amber-700 mr-1">추천</span>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-purple-100 text-purple-700">★ 홍조픽</span>
+        </div>
+      </div>
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="cleansingfoam">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/bioderma_sebium.jpg" alt="바이오더마 세비움 퓨리파잉 포밍 젤" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">바이오더마</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">세비움 퓨리파잉 포밍 젤 200ml</div>
+          <div class="text-xs text-gray-500 mt-1">징크 글루코네이트 · 살리실산(BHA) · 무향</div>
+          <div class="text-sm font-bold text-[#e8507a] mt-1">~18,000원</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-amber-100 text-amber-700 mr-1">추천</span>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-purple-100 text-purple-700">★ 가성비픽</span>
+          <div class="text-[11px] text-amber-600 mt-1">⚠ BHA 패드 사용일 병용 주의</div>
+        </div>
+      </div>
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="cleansingfoam">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/drg_foam.jpg" alt="닥터지 레드 블레미쉬 클리어 수딩 폼" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">닥터지</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">레드 블레미쉬 클리어 수딩 폼 150ml</div>
+          <div class="text-xs text-gray-500 mt-1">시카 · 판테놀B5 · 어성초 · 베타인 계면활성제</div>
+          <div class="text-sm font-bold text-[#e8507a] mt-1"><span class="line-through text-gray-400 font-normal text-xs mr-1">14,000원</span>12,000원</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-amber-100 text-amber-700 mr-1">추천</span>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-purple-100 text-purple-700">★ 입문픽</span>
+        </div>
+      </div>
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="cleansingfoam">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/anua_foam.jpg" alt="아누아 어성초 77 수딩 토닝 클렌저" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">아누아</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">어성초 77 수딩 토닝 클렌저 150ml</div>
+          <div class="text-xs text-gray-500 mt-1">어성초 77% · 알란토인 · 저자극 계면활성제</div>
+          <div class="text-sm font-bold text-[#e8507a] mt-1"><span class="line-through text-gray-400 font-normal text-xs mr-1">15,000원</span>13,000원</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-amber-100 text-amber-700 mr-1">추천</span>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-purple-100 text-purple-700">★ 홍조픽</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 클렌징 밀크 -->
+    <div class="sub-header text-sm font-bold text-[#7a3a3a] bg-[#fce8e8] rounded-xl px-3 py-2 mb-3 flex items-center gap-2" data-cat="milk">🥛 클렌징 밀크 — 저자극 더블클렌징 (1차 클렌저)</div>
+    <div class="products-grid grid grid-cols-2 sm:grid-cols-3 gap-3 mb-2">
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="milk">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/cetaphil_milk.jpg" alt="세타필 클렌징 밀크" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">세타필</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">클렌징 밀크 200ml</div>
+          <div class="text-xs text-gray-500 mt-1">글리세린 · 세틸알코올 · 비이온성 계면활성제 · 무향</div>
+          <div class="text-sm font-bold text-[#e8507a] mt-1">~15,000원</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-green-100 text-green-700 mr-1">장벽픽</span>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-amber-100 text-amber-700">추천</span>
+        </div>
+      </div>
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="milk">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/lrp_toleriane.jpg" alt="라로슈포제 톨레리안 더마 클렌저" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">라로슈포제</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">톨레리안 더마 클렌저 400ml</div>
+          <div class="text-xs text-gray-500 mt-1">나이아신아마이드 · 세라마이드 · 무향</div>
+          <div class="text-sm font-bold text-[#e8507a] mt-1">~22,000원</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-purple-100 text-purple-700 mr-1">★ 홍조픽</span>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-green-100 text-green-700">장벽픽</span>
+        </div>
+      </div>
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="milk">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/cosrx_oiltomilk.jpg" alt="코스알엑스 퓨어 핏 클렌징 오일-투-밀크" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">코스알엑스</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">퓨어 핏 클렌징 오일-투-밀크 200ml</div>
+          <div class="text-xs text-gray-500 mt-1">호호바오일 · 세라마이드 · 폴리글리세릴</div>
+          <div class="text-sm font-bold text-[#e8507a] mt-1">~18,000원</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-amber-100 text-amber-700 mr-1">추천</span>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-purple-100 text-purple-700">★ 가성비픽</span>
+          <div class="text-[11px] text-amber-600 mt-1">⚠ 아젤리아 사용 전 2차 폼세안 필수</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 에멀전 밀크 -->
+    <div class="sub-header text-sm font-bold text-[#7a3a3a] bg-[#fce8e8] rounded-xl px-3 py-2 mb-3 flex items-center gap-2" data-cat="milk">🥛 에멀전 밀크 — 수분·유분 밸런스 보습</div>
+    <div class="products-grid grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="milk">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/innisfree_emulsion.jpg" alt="이니스프리 그린티 씨드 유스 에센스-인-에멀전" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">이니스프리</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">그린티 씨드 유스 에센스-인-에멀전 160ml</div>
+          <div class="text-xs text-gray-500 mt-1">제주 녹차수 · 히알루론산 · 녹차씨오일 · 베타글루칸</div>
+          <div class="text-sm font-bold text-[#e8507a] mt-1">~18,000원</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-amber-100 text-amber-700 mr-1">추천</span>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-purple-100 text-purple-700">★ 상시픽</span>
+        </div>
+      </div>
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="milk">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/drg_emulsion.jpg" alt="닥터지 레드 블레미쉬 클리어 수딩 에멀전" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">닥터지</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">레드 블레미쉬 클리어 수딩 에멀전 150ml</div>
+          <div class="text-xs text-gray-500 mt-1">시카 · 마데카소사이드 · 판테놀 · 나이아신아마이드</div>
+          <div class="text-sm font-bold text-[#e8507a] mt-1">~15,000원</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-amber-100 text-amber-700 mr-1">추천</span>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-purple-100 text-purple-700">★ 홍조픽</span>
+        </div>
+      </div>
+      <div class="product-card bg-white rounded-2xl shadow-md overflow-hidden" data-cat="milk">
+        <div class="img-wrap aspect-square overflow-hidden bg-gray-50"><img class="w-full h-full object-contain" src="images/avene_emulsion.jpg" alt="아벤느 클린-AC 컨센트레이티드 이멀전" loading="lazy"></div>
+        <div class="p-3">
+          <div class="text-xs text-[#e8507a] font-bold">아벤느</div>
+          <div class="text-sm font-bold text-gray-800 mt-0.5 leading-tight">클린-AC 컨센트레이티드 이멀전 40ml</div>
+          <div class="text-xs text-gray-500 mt-1">아벤느 온천수 · 피록톤올아민 · 글리세린 · 무향</div>
+          <div class="text-sm font-bold text-[#e8507a] mt-1">~28,000원</div>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-green-100 text-green-700 mr-1">장벽픽</span>
+          <span class="inline-block text-[11px] px-2 py-0.5 rounded-full mt-1 font-semibold bg-purple-100 text-purple-700">★ 홍조픽</span>
         </div>
       </div>
     </div>
