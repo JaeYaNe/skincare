@@ -700,5 +700,135 @@
     "isRx": true,
     "brandColor": "#7b1fa2",
     "query": null
+  },
+  {
+    "id": 34,
+    "brand": "아비브",
+    "name": "어성초 카밍 토너 스킨부스터 200ml",
+    "image": "abib_houttuynia_toner.jpg",
+    "cat": "houttuynia",
+    "price": 16100,
+    "originalPrice": 23000,
+    "priceApprox": false,
+    "ingredients": [
+      {"name": "약모밀추출물 (어성초)", "amount": null},
+      {"name": "판테놀", "amount": null},
+      {"name": "소듐하이알루로네이트", "amount": null},
+      {"name": "비피다발효용해물", "amount": null},
+      {"name": "병풀추출물", "amount": null}
+    ],
+    "badges": ["상시픽", "홍조픽"],
+    "warning": null,
+    "usage": null,
+    "isDaiso": false,
+    "isRx": false,
+    "brandColor": null,
+    "query": "아비브 어성초 카밍 토너"
+  },
+  {
+    "id": 35,
+    "brand": "DMCK",
+    "name": "클린 아크 앰플 30ml",
+    "image": "dmck_clean_arc.jpg",
+    "cat": "cica",
+    "price": null,
+    "originalPrice": 27000,
+    "priceApprox": true,
+    "ingredients": [
+      {"name": "시카 복합 성분", "amount": null},
+      {"name": "트러블케어 성분", "amount": null}
+    ],
+    "badges": ["추천"],
+    "warning": null,
+    "usage": null,
+    "isDaiso": false,
+    "isRx": false,
+    "brandColor": null,
+    "query": "DMCK 클린 아크 앰플"
+  },
+  {
+    "id": 36,
+    "brand": "에스네이처",
+    "name": "아쿠아 오아시스 수분 젤크림 90ml",
+    "image": "snature_aqua_oasis.jpg",
+    "cat": "panthenol",
+    "price": null,
+    "originalPrice": 32000,
+    "priceApprox": true,
+    "ingredients": [
+      {"name": "8종 히알루론산", "amount": null},
+      {"name": "블루아가베잎추출물", "amount": null},
+      {"name": "알란토인", "amount": null}
+    ],
+    "badges": ["추천"],
+    "warning": null,
+    "usage": null,
+    "isDaiso": false,
+    "isRx": false,
+    "brandColor": null,
+    "query": "에스네이처 아쿠아 오아시스 젤크림"
+  },
+  {
+    "id": 37,
+    "brand": "더랩바이블랑두",
+    "name": "올리고 히알루론산 딥 토너 200ml",
+    "image": "blancdoux_oligo_ha_toner.jpg",
+    "cat": "panthenol",
+    "price": 15100,
+    "originalPrice": null,
+    "priceApprox": true,
+    "ingredients": [
+      {"name": "올리고 히알루론산 (초저분자)", "amount": null}
+    ],
+    "badges": ["가성비픽"],
+    "warning": null,
+    "usage": null,
+    "isDaiso": false,
+    "isRx": false,
+    "brandColor": null,
+    "query": "더랩바이블랑두 올리고 히알루론산 토너"
+  },
+  {
+    "id": 38,
+    "brand": "유이크",
+    "name": "바이옴 레미디 하이드로 카밍 캡슐 앰플",
+    "image": "uiq_biome_capsule_ampoule.jpg",
+    "cat": "cica",
+    "price": 27000,
+    "originalPrice": null,
+    "priceApprox": true,
+    "ingredients": [
+      {"name": "바이옴 복합 성분 (마이크로바이옴)", "amount": null}
+    ],
+    "badges": ["추천"],
+    "warning": null,
+    "usage": null,
+    "isDaiso": false,
+    "isRx": false,
+    "brandColor": null,
+    "query": "유이크 바이옴 레미디 캡슐 앰플"
+  },
+  {
+    "id": 39,
+    "brand": "비플레인",
+    "name": "시카테롤 크림 60ml",
+    "image": "beplain_cicaterol_cream.jpg",
+    "cat": "cica",
+    "price": null,
+    "originalPrice": 28000,
+    "priceApprox": true,
+    "ingredients": [
+      {"name": "병풀추출물", "amount": "3.5%"},
+      {"name": "판테놀", "amount": null},
+      {"name": "마데카소사이드", "amount": null},
+      {"name": "아시아티코사이드", "amount": null}
+    ],
+    "badges": ["장벽픽", "홍조픽"],
+    "warning": null,
+    "usage": null,
+    "isDaiso": false,
+    "isRx": false,
+    "brandColor": null,
+    "query": "비플레인 시카테롤 크림"
   }
 ]
