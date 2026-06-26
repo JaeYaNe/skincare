@@ -717,7 +717,7 @@
       {"name": "비피다발효용해물", "amount": null},
       {"name": "병풀추출물", "amount": null}
     ],
-    "badges": ["상시픽", "홍조픽"],
+    "badges": ["상시픽", "홍조픽", "스완픽", "지성추천"],
     "warning": null,
     "usage": null,
     "isDaiso": false,
@@ -738,7 +738,7 @@
       {"name": "시카 복합 성분", "amount": null},
       {"name": "트러블케어 성분", "amount": null}
     ],
-    "badges": ["추천"],
+    "badges": ["추천", "스완픽", "지성추천"],
     "warning": null,
     "usage": null,
     "isDaiso": false,
@@ -760,7 +760,7 @@
       {"name": "블루아가베잎추출물", "amount": null},
       {"name": "알란토인", "amount": null}
     ],
-    "badges": ["추천"],
+    "badges": ["추천", "스완픽", "지성추천"],
     "warning": null,
     "usage": null,
     "isDaiso": false,
@@ -780,7 +780,7 @@
     "ingredients": [
       {"name": "올리고 히알루론산 (초저분자)", "amount": null}
     ],
-    "badges": ["가성비픽"],
+    "badges": ["가성비픽", "스완픽", "복합성/수부지 추천"],
     "warning": null,
     "usage": null,
     "isDaiso": false,
@@ -800,7 +800,7 @@
     "ingredients": [
       {"name": "바이옴 복합 성분 (마이크로바이옴)", "amount": null}
     ],
-    "badges": ["추천"],
+    "badges": ["추천", "스완픽", "복합성/수부지 추천"],
     "warning": null,
     "usage": null,
     "isDaiso": false,
@@ -823,7 +823,7 @@
       {"name": "마데카소사이드", "amount": null},
       {"name": "아시아티코사이드", "amount": null}
     ],
-    "badges": ["장벽픽", "홍조픽"],
+    "badges": ["장벽픽", "홍조픽", "스완픽", "복합성/수부지 추천"],
     "warning": null,
     "usage": null,
     "isDaiso": false,
